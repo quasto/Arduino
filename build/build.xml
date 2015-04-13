@@ -441,7 +441,7 @@
 
     <!-- Sign app -->
     <exec executable="codesign" dir="macosx/work">
-      <arg line="--force -s &quot;Arduino Srl&quot; -v Arduino.app/" />
+      <arg line="--force -s &quot;ARDUINO SRL&quot; -v Arduino.app/" />
     </exec>
 
     <!-- Check for successful signing -->
