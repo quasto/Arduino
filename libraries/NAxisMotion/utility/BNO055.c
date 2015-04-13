@@ -56,7 +56,7 @@
 /*********************************************************/
 /*				INCLUDES	*/
 /*******************************************************/
-#include "bno055.h"
+#include "BNO055.h"
 /*! file <BNO055 >
     brief <Sensor driver for BNO055> */
 /*	STRUCTURE DEFINITIONS	*/
