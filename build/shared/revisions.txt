@@ -1,4 +1,14 @@
-ARDUINO 1.7.0 - 2015.30.03
+ARDUINO 1.7.1 - 2015.04.13
+
+[libraries]
+* fix BNO055 include in 9 Axes Motion Shield library (@boen)
+* add Ethernet 2 Shield library
+* add GSM 2 Shield library
+
+[ide]
+* add bootloader source code of arduino zero pro
+
+ARDUINO 1.7.0 - 2015.03.30
 
 [libraries]
 * Update DAC, ADC, PWM, Digital for SAMD
