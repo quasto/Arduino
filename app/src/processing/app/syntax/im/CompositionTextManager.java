@@ -27,6 +27,8 @@ import processing.app.syntax.TextAreaPainter;
  * Finally the user try to commit text, endCompositionText is called.
  *  
  * @author Takashi Maekawa (takachin@generative.info)
+ *
+ * modified 15.Apr.2015 quasto (sergio@arduino.org)
  */
 
 public class CompositionTextManager {
