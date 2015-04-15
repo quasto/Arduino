@@ -135,6 +135,31 @@ public class CompositionTextManager {
     if(committed_count == 0){
       removeNotCommittedText(text);
     }
+    else {
+      /*
+       * If committed_count greater than 0 we have to replace previosly printed char(s)
+       * with new one(s), in this way we can handle accented and special Unicode chars
+       */
+      StringBuffer unCommitedStringBuf = new StringBuffer(committed_count);
+
+      for (char c = text.setIndex(0); c != AttributedCharacterIterator.DONE; c = text.next()) {
+        unCommitedStringBuf.append(c);
+      }
+      String unCommittedString = unCommitedStringBuf.toString();
+      try {
+        int layoutCaretPosition = textArea.getCaretPosition();
+        int prevCharCount = (prevComposeString.length() > 0) ? prevComposeString.length() : committed_count;
+        if(prevCharCount > 0){
+          initialCaretPosition = layoutCaretPosition - prevCharCount;
+          textArea.getDocument().remove(initialCaretPosition, prevCharCount);
+        }
+        textArea.getDocument().insertString(initialCaretPosition, unCommittedString, null);
+
+        prevCommittedCount = committed_count;
+      } catch (BadLocationException e) {
+        e.printStackTrace();
+      }
+    }
     CompositionTextPainter compositionPainter = textArea.getPainter().getCompositionTextpainter();
     compositionPainter.invalidateComposedTextLayout(initialCaretPosition + committed_count);
     prevComposeString = "";
