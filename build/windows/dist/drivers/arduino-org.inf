@@ -12,6 +12,8 @@ esplora.bootloader.name="Arduino Esplora bootloader"
 esplora.sketch.name="Arduino Esplora"
 leonardo.bootloader.name="Arduino Leonardo bootloader"
 leonardo.sketch.name="Arduino Leonardo"
+leonardoeth.bootloader.name="Arduino Leonardo ETH bootloader"
+leonardoeth.sketch.name="Arduino Leonardo ETH"
 lilypadUSB.bootloader.name="Arduino LilyPad USB bootloader"
 lilypadUSB.sketch.name="Arduino LilyPad USB"
 mega2560.name="Arduino Mega 2560"
@@ -30,9 +32,7 @@ yun.bootloader.name="Arduino Yun bootloader"
 yun.sketch.name="Arduino Yun"
 
 zero_pro.edbg.name="Atmel Corp. EDBG USB Port"
-zero.usbport.name="Arduino Zero Native Port"
 zero_pro.usbport.name="Arduino Zero PRO Native Port"
-zero_boot.usbport.name="Arduino Zero (Bootloader Mode) - Native Port"
 zero_pro_boot.usbport.name="Arduino Zero PRO (Bootloader Mode) Native Port"
 
 microADK.bootloader.name="Arduino Micro ADK bootloader"
@@ -65,6 +65,8 @@ DefaultDestDir=12
 %esplora.sketch.name%=DriverInstall, USB\VID_2A03&PID_803C&MI_00
 %leonardo.bootloader.name%=DriverInstall, USB\VID_2A03&PID_0036
 %leonardo.sketch.name%=DriverInstall, USB\VID_2A03&PID_8036&MI_00
+%leonardoeth.bootloader.name%=DriverInstall, USB\VID_2A03&PID_0040
+%leonardoeth.sketch.name%=DriverInstall, USB\VID_2A03&PID_8040&MI_00
 %lilypadUSB.bootloader.name%=DriverInstall, USB\VID_1B4F&PID_9207
 %lilypadUSB.sketch.name%=DriverInstall, USB\VID_1B4F&PID_9208&MI_00
 %mega2560rev3.name%=DriverInstall, USB\VID_2A03&PID_0042
@@ -83,9 +85,7 @@ DefaultDestDir=12
 %yun.sketch.name%=DriverInstall, USB\VID_2A03&PID_8041&MI_00
 
 %zero_pro.edbg.name%=DriverInstall, USB\VID_03EB&PID_2111&MI_01
-%zero.usbport.name%=DriverInstall, USB\VID_2A03&PID_804E
 %zero_pro.usbport.name%=DriverInstall, USB\VID_2A03&PID_804D
-%zero_boot.usbport.name%=DriverInstall, USB\VID_2A03&PID_004E
 %zero_pro_boot.usbport.name%=DriverInstall, USB\VID_2A03&PID_004D
 
 %microADK.bootloader.name%=DriverInstall, USB\VID_2A03&PID_003A
@@ -99,6 +99,8 @@ DefaultDestDir=12
 %esplora.sketch.name%=DriverInstall, USB\VID_2A03&PID_803C&MI_00
 %leonardo.bootloader.name%=DriverInstall, USB\VID_2A03&PID_0036
 %leonardo.sketch.name%=DriverInstall, USB\VID_2A03&PID_8036&MI_00
+%leonardoeth.bootloader.name%=DriverInstall, USB\VID_2A03&PID_0040
+%leonardoeth.sketch.name%=DriverInstall, USB\VID_2A03&PID_8040&MI_00
 %lilypadUSB.bootloader.name%=DriverInstall, USB\VID_1B4F&PID_9207
 %lilypadUSB.sketch.name%=DriverInstall, USB\VID_1B4F&PID_9208&MI_00
 %mega2560rev3.name%=DriverInstall, USB\VID_2A03&PID_0042
@@ -118,9 +120,7 @@ DefaultDestDir=12
 
 %zero_pro.edbg.name%=DriverInstall, USB\VID_03EB&PID_2111&MI_01
 %zero_pro_boot.usbport.name%=DriverInstall, USB\VID_2A03&PID_004D
-%zero_boot.usbport.name%=DriverInstall, USB\VID_2A03&PID_004E
 %zero_pro.usbport.name%=DriverInstall, USB\VID_2A03&PID_804D
-%zero.usbport.name%=DriverInstall, USB\VID_2A03&PID_804E
 
 %microADK.bootloader.name%=DriverInstall, USB\VID_2A03&PID_003A
 %microADK.sketch.name%=DriverInstall, USB\VID_2A03&PID_803A&MI_00
@@ -130,6 +130,8 @@ DefaultDestDir=12
 %esplora.sketch.name%=DriverInstall, USB\VID_2A03&PID_803C&MI_00
 %leonardo.bootloader.name%=DriverInstall, USB\VID_2A03&PID_0036
 %leonardo.sketch.name%=DriverInstall, USB\VID_2A03&PID_8036&MI_00
+%leonardoeth.bootloader.name%=DriverInstall, USB\VID_2A03&PID_0040
+%leonardoeth.sketch.name%=DriverInstall, USB\VID_2A03&PID_8040&MI_00
 %lilypadUSB.bootloader.name%=DriverInstall, USB\VID_1B4F&PID_9207
 %lilypadUSB.sketch.name%=DriverInstall, USB\VID_1B4F&PID_9208&MI_00
 %mega2560rev3.name%=DriverInstall, USB\VID_2A03&PID_0042
@@ -149,9 +151,7 @@ DefaultDestDir=12
 
 %zero_pro.edbg.name%=DriverInstall, USB\VID_03EB&PID_2111&MI_01
 %zero_pro_boot.usbport.name%=DriverInstall, USB\VID_2A03&PID_004D
-%zero_boot.usbport.name%=DriverInstall, USB\VID_2A03&PID_004E
 %zero_pro.usbport.name%=DriverInstall, USB\VID_2A03&PID_804D
-%zero.usbport.name%=DriverInstall, USB\VID_2A03&PID_804E
 
 %microADK.bootloader.name%=DriverInstall, USB\VID_2A03&PID_003A
 %microADK.sketch.name%=DriverInstall, USB\VID_2A03&PID_803A&MI_00
