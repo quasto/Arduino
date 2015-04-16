@@ -1,3 +1,16 @@
+ARDUINO 1.7.2 - 2015.04.16
+
+[libraries]
+* Cleaned up GSM Shield 2 library code
+* Fixed SS pin in the SD library
+
+[ide]
+* Fixed a bug that prevented the typing of special characters in the editor of the IDE (https://github.com/arduino-org/Arduino/issues/4)
+* Add the new Arduino Leonardo ETH board
+
+[bootloaders]
+* Fixed Win 8.1 USB 3.0 bug (Arduino Zero Pro)
+
 ARDUINO 1.7.1 - 2015.04.13
 
 [libraries]
