@@ -42,10 +42,8 @@ class GSM3ShieldV2
         GSM3ShieldV2(bool db);
 
         bool debug=false;
-		String beginPosition_GPRS();							// Choose the content 0 to activate GPRS/CSCD context
-		String beginPosition_TCP();								// Register to the TCP/IP stack
-		String beginPosition_PDP();								// Activate PDP context
-		String getPosition(); 									// Get Current Location
+		
+        String getPosition(); 									// Get Current Location
     
         // Aded for voice call debug
         String speakerLoudness(int level); 					// set the speaker Volume
