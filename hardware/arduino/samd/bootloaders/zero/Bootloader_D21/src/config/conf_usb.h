@@ -70,7 +70,7 @@
 #endif
 #define  USB_DEVICE_MAJOR_VERSION         1
 #define  USB_DEVICE_MINOR_VERSION         0
-#define  USB_DEVICE_POWER                 100 // Consumption on Vbus line (mA)
+#define  USB_DEVICE_POWER                 500 // Consumption on Vbus line (mA)
 #define  USB_DEVICE_ATTR                  \
 	(USB_CONFIG_ATTR_SELF_POWERED)
 // (USB_CONFIG_ATTR_BUS_POWERED)
@@ -80,7 +80,7 @@
 //! USB Device string definitions (Optional)
 #define  USB_DEVICE_MANUFACTURE_NAME     USB_VENDOR_DESCRIPTOR
 #define  USB_DEVICE_PRODUCT_NAME         USB_PRODUCT_NAME
-// #define  USB_DEVICE_SERIAL_NAME           "0000000"
+#define  USB_DEVICE_SERIAL_NAME           "004D"
 
 
 /**

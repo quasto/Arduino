@@ -250,7 +250,7 @@ int main (void)
 	NVIC_SetPriority(USB_IRQn, 1);//USB Should have lower priority than rtc
 
 	//check if boot-protection is on
-	//protect_boot_section();												//uncomment for release
+	protect_boot_section();												//uncomment for release
 
 	//(edbg does not write to boot-section if this is protected 
 	//(bootprot can be manually changed to 0x07 in the "fuses" tab of atmel studio to reprogram)
