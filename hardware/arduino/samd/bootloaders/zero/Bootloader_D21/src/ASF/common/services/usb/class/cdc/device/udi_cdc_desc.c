@@ -134,7 +134,7 @@ UDC_DESC_STORAGE usb_dev_lpm_desc_t udc_device_lpm = {
 	.capa_ext.bLength          = sizeof(usb_dev_capa_ext_desc_t),
 	.capa_ext.bDescriptorType  = USB_DT_DEVICE_CAPABILITY,
 	.capa_ext.bDevCapabilityType = USB_DC_USB20_EXTENSION,
-	.capa_ext.bmAttributes     = USB_DC_EXT_LPM, //	alfran: modified to fix ASF some USB 3.0 controller incompatibility
+	.capa_ext.bmAttributes     = USB_DC_EXT_LPM, //	alfran: modified to fix ASF USB 3.0 incompatibility
 };
 #endif
 

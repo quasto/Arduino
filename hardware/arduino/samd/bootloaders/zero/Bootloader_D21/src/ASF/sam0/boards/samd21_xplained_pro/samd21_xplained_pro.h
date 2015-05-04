@@ -81,11 +81,24 @@ void system_board_init(void);
 #define BOARD_OSC_STARTUP_US      15625
 /** @} */
 
-/** \name LED0 definitions
+/** \name LED definitions
  *  @{ */
-#define LED0_PIN                  PIN_PA27
+#define LED0_PIN                  PIN_PA17	// only for compatibility, this pin is used also by L LED
 #define LED0_ACTIVE               false
 #define LED0_INACTIVE             !LED0_ACTIVE
+
+#define LEDL_PIN                  PIN_PA17  //defining LED L PORT PIN
+#define LEDL_ACTIVE               false
+#define LEDL_INACTIVE             !LEDL_ACTIVE
+
+#define LEDRX_PIN                 PIN_PB03   //defining LED RX PORT PIN
+#define LEDRX_ACTIVE              false
+#define LEDRX_INACTIVE            !LEDL_ACTIVE
+
+#define LEDTX_PIN                 PIN_PA27   //defining LED TX PORT PIN
+#define LEDTX_ACTIVE              false
+#define LEDTX_INACTIVE            !LEDL_ACTIVE
+
 /** @} */
 
 /** \name SW0 definitions
@@ -105,6 +118,8 @@ void system_board_init(void);
  * Wrapper macros for LED0, to ensure common naming across all Xplained Pro
  * boards.
  *
+ * LED L, LED RX and LED TX are used by Arduino srl SAM D21 based boards. LED 0 remain only for compatibility. 
+ *
  *  @{ */
 #define LED_0_NAME                "LED0 (yellow)"
 #define LED_0_PIN                 LED0_PIN
@@ -112,6 +127,27 @@ void system_board_init(void);
 #define LED_0_INACTIVE            LED0_INACTIVE
 #define LED0_GPIO                 LED0_PIN
 #define LED0                      LED0_PIN
+
+#define LED_L_NAME                "LED L"
+#define LED_L_PIN                 LEDL_PIN
+#define LED_L_ACTIVE              LEDL_ACTIVE
+#define LED_L_INACTIVE            LEDL_INACTIVE
+#define LEDL_GPIO                 LEDL_PIN
+#define LEDL                      LEDL_PIN
+
+#define LED_RX_NAME               "LED RX"
+#define LED_RX_PIN                LEDRX_PIN
+#define LED_RX_ACTIVE             LEDRX_ACTIVE
+#define LED_RX_INACTIVE           LEDRX_INACTIVE
+#define LEDRX_GPIO                LEDRX_PIN
+#define LEDRX                     LEDRX_PIN
+
+#define LED_TX_NAME               "LED L"
+#define LED_TX_PIN                LEDTX_PIN
+#define LED_TX_ACTIVE             LEDTX_ACTIVE
+#define LED_TX_INACTIVE           LEDTX_INACTIVE
+#define LEDTX_GPIO                LEDTX_PIN
+#define LEDTX                     LEDTX_PIN
 
 #define LED_0_PWM4CTRL_MODULE     TCC0
 #define LED_0_PWM4CTRL_CHANNEL    0
@@ -145,6 +181,7 @@ void system_board_init(void);
  * Wrapper macros for SW0, to ensure common naming across all Xplained Pro
  * boards.
  *
+ * button 0 is used only for compatibility purpose, and are not used in Arduino srl SAM D21 Based Boards.
  *  @{ */
 #define BUTTON_0_NAME             "SW0"
 #define BUTTON_0_PIN              SW0_PIN

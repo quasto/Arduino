@@ -125,7 +125,7 @@ void rtc_overflow_callback(void)
 	}
 	if((timeout % 50) == 0)
 	{
-		port_pin_toggle_output_level(LED_0_PIN);
+		port_pin_toggle_output_level(LED_L_PIN);		// when the board is in bootloader mode the L Led blink
 	}
 }
 void configure_timeout()
@@ -227,12 +227,18 @@ void protect_boot_section()
 
 int main (void)
 {
+	
+	port_pin_set_output_level(LED_L_PIN,LED_L_INACTIVE);
+	port_pin_set_output_level(LED_TX_PIN,LED_TX_INACTIVE);
+	port_pin_set_output_level(LED_RX_PIN,LED_RX_INACTIVE);
 	/* Check if WDT is locked */
+	
+	
 	if (!(WDT->CTRL.reg & WDT_CTRL_ALWAYSON)) {
 		/* Disable the Watchdog module */
 		WDT->CTRL.reg &= ~WDT_CTRL_ENABLE;
 	}
-	if(!(PM->RCAUSE.reg & PM_RCAUSE_EXT) && !(PM->RCAUSE.reg & PM_RCAUSE_WDT) && (NVM_MEMORY[APP_START_ADDR / 2] != 0xFFFF)) //Power on reset or systemResetReq -> run main app
+	if(!(PM->RCAUSE.reg & PM_RCAUSE_EXT) && !(PM->RCAUSE.reg & PM_RCAUSE_WDT) && (NVM_MEMORY[APP_START_ADDR / 2] != 0xFFFF))		//Power on reset or systemResetReq -> run main app
 	{
 		start_application();
 	}
@@ -247,13 +253,14 @@ int main (void)
 	
 	// Start USB stack to authorize VBus monitoring
 	udc_start();
-	NVIC_SetPriority(USB_IRQn, 1);//USB Should have lower priority than rtc
+	NVIC_SetPriority(USB_IRQn, 1);		//USB Should have lower priority than rtc
 
 	//check if boot-protection is on
+	//(edbg does not write to boot-section if this is protected
+	//(bootprot can be manually changed to 0x07 in the "fuses" tab of Atmel tudio to reprogram)
+	
 	protect_boot_section();												//uncomment for release
 
-	//(edbg does not write to boot-section if this is protected 
-	//(bootprot can be manually changed to 0x07 in the "fuses" tab of atmel studio to reprogram)
 	while (1) {
 		get_message();//STK500v2
 	}
@@ -263,6 +270,6 @@ void main_cdc_config(uint8_t port,usb_cdc_line_coding_t *cfg)
 {
 	if(cfg[port].dwDTERate == 1200)
 	{
-		//do something on rate 1200?
+		//do nothing
 	}
 }

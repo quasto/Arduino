@@ -30,10 +30,15 @@ volatile uint32_t timeout = 0;
 volatile uint32_t current_address = APP_START_ADDR;
 uint8_t GET_COMMAND_BYTE()
 {
+	port_pin_set_output_level(LED_RX_PIN,LED_RX_INACTIVE);		// RX LED management
+	
 	while(!udi_cdc_is_rx_ready())
 	{
 		
 	}
+	
+	port_pin_set_output_level(LED_RX_PIN,LED_RX_ACTIVE);		// RX LED management
+
 	return udi_cdc_multi_getc(0);
 }
 
@@ -44,10 +49,16 @@ void SEND_RESPONSE(char response)
 	//	udi_cdc_signal_overrun();
 	//	ui_com_overflow();//not implemented yet
 	//}
+	
+	port_pin_set_output_level(LED_TX_PIN,LED_TX_INACTIVE);		// TX LED management
+	
 	while(!udi_cdc_is_tx_ready())
 	{
 		
 	}
+	
+	port_pin_set_output_level(LED_TX_PIN,LED_TX_ACTIVE);		// TX LED management
+	
 	udi_cdc_putc(response);
 	return;
 }
@@ -141,7 +152,7 @@ void get_message()
 				}
 				break;
 			case STATE_GET_SEQUENCE_NUMBER:
-				sequence_number = received_char;//ignore sequence number, always accept
+				sequence_number = received_char;		//ignore sequence number, always accept
 				current_state = STATE_GET_MESSAGE_SIZE_1;
 				break;
 			case STATE_GET_MESSAGE_SIZE_1:
@@ -172,7 +183,7 @@ void get_message()
 				}
 				break;
 			case STATE_GET_CHECKSUM:
-				if(get_checksum(current_byte_in_message-1, message) == received_char)//ignore last byte (should not include checksum in checksum)
+				if(get_checksum(current_byte_in_message-1, message) == received_char)		//ignore last byte (should not include checksum in checksum)
 				{
 					building_message = false;
 				}

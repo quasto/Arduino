@@ -59,6 +59,7 @@
  #define USB_PRODUCT_NAME					"Arduino Zero PRO"
 
 
+
 //! Device definition (mandatory)
 #define  USB_DEVICE_VENDOR_ID				USB_VENDOR_ID
 #if BOARD == UC3B_BOARD_CONTROLLER
@@ -80,7 +81,8 @@
 //! USB Device string definitions (Optional)
 #define  USB_DEVICE_MANUFACTURE_NAME     USB_VENDOR_DESCRIPTOR
 #define  USB_DEVICE_PRODUCT_NAME         USB_PRODUCT_NAME
-#define  USB_DEVICE_SERIAL_NAME           "004D"
+#define  USB_DEVICE_SERIAL_NAME           "004D"			// Arduino Zero PRO USB Serial Number
+
 
 
 /**

@@ -62,7 +62,19 @@ void system_board_init(void)
 	pin_conf.direction  = PORT_PIN_DIR_OUTPUT;
 	port_pin_set_config(LED_0_PIN, &pin_conf);
 	port_pin_set_output_level(LED_0_PIN, LED_0_INACTIVE);
-
+	
+	pin_conf.direction  = PORT_PIN_DIR_OUTPUT;
+	port_pin_set_config(LED_L_PIN, &pin_conf);
+	port_pin_set_output_level(LED_L_PIN, LED_0_INACTIVE);
+	
+	pin_conf.direction  = PORT_PIN_DIR_OUTPUT;
+	port_pin_set_config(LED_RX_PIN, &pin_conf);
+	port_pin_set_output_level(LED_RX_PIN, LED_RX_INACTIVE);
+	
+	pin_conf.direction  = PORT_PIN_DIR_OUTPUT;
+	port_pin_set_config(LED_TX_PIN, &pin_conf);
+	port_pin_set_output_level(LED_RX_PIN, LED_RX_INACTIVE);
+	
 	/* Set buttons as inputs */
 	pin_conf.direction  = PORT_PIN_DIR_INPUT;
 	pin_conf.input_pull = PORT_PIN_PULL_UP;
