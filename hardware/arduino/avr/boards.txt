@@ -45,6 +45,43 @@ yun.build.extra_flags={build.usb_flags}
 
 ##############################################################
 
+yunmini.name=Arduino Yún Mini
+yunmini.upload.via_ssh=true
+
+yunmini.vid.0=0x2a03
+yunmini.pid.0=0x0050
+yunmini.vid.1=0x2a03
+yunmini.pid.1=0x8050
+
+yunmini.upload.tool=avrdude
+yunmini.upload.protocol=avr109
+yunmini.upload.maximum_size=28672
+yunmini.upload.maximum_data_size=2560
+yunmini.upload.speed=57600
+yunmini.upload.disable_flushing=true
+yunmini.upload.use_1200bps_touch=true
+yunmini.upload.wait_for_upload_port=true
+
+yunmini.bootloader.tool=avrdude
+yunmini.bootloader.low_fuses=0xff
+yunmini.bootloader.high_fuses=0xd8
+yunmini.bootloader.extended_fuses=0xfb
+yunmini.bootloader.file=caterina/Caterina-Yunmini.hex
+yunmini.bootloader.unlock_bits=0x3F
+yunmini.bootloader.lock_bits=0x2F
+
+yunmini.build.mcu=atmega32u4
+yunmini.build.f_cpu=16000000L
+yunmini.build.vid=0x2a03
+yunmini.build.pid=0x8050
+yunmini.build.usb_product="Arduino Yún Mini"
+yunmini.build.board=AVR_YUN
+yunmini.build.core=arduino
+yunmini.build.variant=yun
+yunmini.build.extra_flags={build.usb_flags}
+
+##############################################################
+
 one.name=Linino One
 one.upload.via_ssh=true
 
@@ -295,10 +332,10 @@ megaADK.build.variant=mega
 ##############################################################
 
 leonardoeth.name=Arduino Leonardo ETH
-leonardoeth.vid.2=0x2a03
-leonardoeth.pid.2=0x0040
-leonardoeth.vid.3=0x2a03
-leonardoeth.pid.3=0x8040
+leonardoeth.vid.0=0x2a03
+leonardoeth.pid.0=0x0040
+leonardoeth.vid.1=0x2a03
+leonardoeth.pid.1=0x8040
 
 leonardoeth.upload.tool=avrdude
 leonardoeth.upload.protocol=avr109

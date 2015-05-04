@@ -30,6 +30,8 @@ robotMotor.bootloader.name="Arduino Robot Motor bootloader"
 robotMotor.sketch.name="Arduino Robot"
 yun.bootloader.name="Arduino Yun bootloader"
 yun.sketch.name="Arduino Yun"
+yunmini.bootloader.name="Arduino Yun Mini bootloader"
+yunmini.sketch.name="Arduino Yun Mini"
 
 zero_pro.edbg.name="Atmel Corp. EDBG USB Port"
 zero_pro.usbport.name="Arduino Zero PRO Native Port"
@@ -83,6 +85,8 @@ DefaultDestDir=12
 %robotMotor.sketch.name%=DriverInstall, USB\VID_2A03&PID_8039&MI_00
 %yun.bootloader.name%=DriverInstall, USB\VID_2A03&PID_0041
 %yun.sketch.name%=DriverInstall, USB\VID_2A03&PID_8041&MI_00
+%yunmini.bootloader.name%=DriverInstall, USB\VID_2A03&PID_0050
+%yunmini.sketch.name%=DriverInstall, USB\VID_2A03&PID_8050&MI_00
 
 %zero_pro.edbg.name%=DriverInstall, USB\VID_03EB&PID_2111&MI_01
 %zero_pro.usbport.name%=DriverInstall, USB\VID_2A03&PID_804D
@@ -117,6 +121,8 @@ DefaultDestDir=12
 %robotMotor.sketch.name%=DriverInstall, USB\VID_2A03&PID_8039&MI_00
 %yun.bootloader.name%=DriverInstall, USB\VID_2A03&PID_0041
 %yun.sketch.name%=DriverInstall, USB\VID_2A03&PID_8041&MI_00
+%yunmini.bootloader.name%=DriverInstall, USB\VID_2A03&PID_0050
+%yunmini.sketch.name%=DriverInstall, USB\VID_2A03&PID_8050&MI_00
 
 %zero_pro.edbg.name%=DriverInstall, USB\VID_03EB&PID_2111&MI_01
 %zero_pro_boot.usbport.name%=DriverInstall, USB\VID_2A03&PID_004D
@@ -148,6 +154,8 @@ DefaultDestDir=12
 %robotMotor.sketch.name%=DriverInstall, USB\VID_2A03&PID_8039&MI_00
 %yun.bootloader.name%=DriverInstall, USB\VID_2A03&PID_0041
 %yun.sketch.name%=DriverInstall, USB\VID_2A03&PID_8041&MI_00
+%yunmini.bootloader.name%=DriverInstall, USB\VID_2A03&PID_0050
+%yunmini.sketch.name%=DriverInstall, USB\VID_2A03&PID_8050&MI_00
 
 %zero_pro.edbg.name%=DriverInstall, USB\VID_03EB&PID_2111&MI_01
 %zero_pro_boot.usbport.name%=DriverInstall, USB\VID_2A03&PID_004D
