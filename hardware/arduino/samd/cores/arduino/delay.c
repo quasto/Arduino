@@ -52,6 +52,7 @@ void delay( uint32_t ms )
 
   uint32_t start = _ulTickCount ;
 
+
   do
   {
     yield() ;
@@ -63,6 +64,143 @@ void SysTick_Handler( void )
   // Increment tick count each ms
   _ulTickCount++ ;
 }
+
+
+void delayMicroseconds(uint32_t usec)
+{
+	unsigned int presc=0, ref=0, sot=1;
+	double ref_val=0.0, div_val=0.0, usec_val=0.0;
+        unsigned long int i=0,limit=0;
+	
+        if (usec <=0) return;
+	usec_val=usec * 1.0;
+	
+	if(usec <= 20)
+        {
+            
+			  
+			if(usec <=9)
+              {
+                limit = usec * 8;
+                for(i=0; i <= limit; i++)
+                {
+                  asm("NOP");
+                }  
+                return;
+              }
+            else
+              {
+                limit = usec * 9;
+                for(i=0; i < limit; i++)
+                {
+                  asm("NOP");
+                }  
+                return;
+              }  
+         }  
+    else if(usec <=1363)
+	{
+		presc=TC_CTRLA_PRESCALER_DIV1;
+		div_val=1.0;
+	        ref = (uint16_t)(usec_val * 48.0 / div_val);
+                if(usec > 20) ref= ref - 921;
+		
+	}	
+
+        else if((usec > 1363)  & (usec <= 5461))
+	{
+		presc=TC_CTRLA_PRESCALER_DIV4;
+		div_val=4.0;
+		ref = (uint16_t)(usec_val * 48.0 / div_val);
+                
+	}	
+	else if((usec > 5461) & (usec <= 10922))
+	{	
+		presc=TC_CTRLA_PRESCALER_DIV8;
+		div_val=8.0;
+		ref = (uint16_t)(usec_val * 48.0 / div_val);
+	}	
+	else if((usec > 10922) & (usec <= 21845))
+	{
+		presc=TC_CTRLA_PRESCALER_DIV16;
+		div_val=16.0;
+		ref = (uint16_t)(usec_val * 48.0 / div_val);
+	}	
+	else if(usec > 21845)
+	{
+		presc=TC_CTRLA_PRESCALER_DIV64;
+		div_val=64.0;
+		ref = (uint16_t)(usec_val * 48.0 / div_val);
+	}
+    else;
+    
+    
+	GCLK->CLKCTRL.reg = (uint16_t) (GCLK_CLKCTRL_CLKEN | GCLK_CLKCTRL_GEN_GCLK0 | GCLK_CLKCTRL_ID( GCM_TC4_TC5 ));
+	
+	 TC4->COUNT16.CTRLA.reg &=~(TC_CTRLA_ENABLE);
+      TC4->COUNT16.CTRLA.reg |= TC_CTRLA_MODE_COUNT16 | presc;
+      TC4->COUNT16.READREQ.reg = 0x4002;
+      TC4->COUNT16.CTRLA.reg |= TC_CTRLA_ENABLE;
+      
+	  
+	  while(TC4->COUNT16.COUNT.reg < ref);
+	  	
+return;
+}
+
+/*void delayMicroseconds(uint32_t usec)
+{
+	unsigned int presc=0, ref=0,div=0;
+	double ref_val=0.0, div_val=0.0, usec_val=0.0;
+	if (usec <=0) return;
+	usec_val=usec * 1.0;
+	
+	if(usec <=5461)
+	{
+		presc=TC_CTRLA_PRESCALER_DIV4;
+		div_val=4.0;
+		div=4;
+		
+	}	
+	else if((usec > 5461) & (usec <= 10922))
+	{	
+		presc=TC_CTRLA_PRESCALER_DIV8;
+		div_val=8.0;
+		div=8;
+	}	
+	else if((usec > 10922) & (usec <= 21845))
+	{
+		presc=TC_CTRLA_PRESCALER_DIV16;
+		div_val=16.0;
+		div=16;
+	}	
+	else if(usec > 21845)
+	{
+		presc=TC_CTRLA_PRESCALER_DIV64;
+		div_val=64.0;
+		div=64;
+	}
+    else;
+
+    ref_val=((usec_val * 48.0) / div_val);
+	ref=(uint16_t)ref_val;
+	SerialUSB.println(ref);
+	GCLK->CLKCTRL.reg = (uint16_t) (GCLK_CLKCTRL_CLKEN | GCLK_CLKCTRL_GEN_GCLK0 | GCLK_CLKCTRL_ID( GCM_TC4_TC5 ));
+	
+	 TC4->COUNT16.CTRLA.reg &=~(TC_CTRLA_ENABLE);
+      TC4->COUNT16.CTRLA.reg = TC_CTRLA_MODE_COUNT16;
+      TC4->COUNT16.CTRLA.reg |= div;
+      TC4->COUNT16.READREQ.reg = 0x4002;
+      TC4->COUNT16.CTRLA.reg |= TC_CTRLA_ENABLE;
+	  
+	  while(TC4->COUNT16.COUNT.reg < ref);
+	  TC4->COUNT16.CTRLA.reg &=~(TC_CTRLA_ENABLE);
+	
+return;
+	
+	
+	
+}*/
 
 #ifdef __cplusplus
 }

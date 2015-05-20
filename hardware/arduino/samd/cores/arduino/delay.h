@@ -60,11 +60,11 @@ extern void delay( uint32_t dwMs ) ;
  *
  * \param dwUs the number of microseconds to pause (uint32_t)
  */
-static inline void delayMicroseconds(uint32_t) __attribute__((always_inline, unused));
-static inline void delayMicroseconds(uint32_t usec){
+//static inline void delayMicroseconds(uint32_t) __attribute__((always_inline, unused));
+/*static inline void delayMicroseconds(uint32_t usec){
     if (usec == 0) return;
     uint32_t n = usec * (VARIANT_MCK / 3000000);
-#if 0
+#if 1
     __asm__ volatile(
         "L_%=_delayMicroseconds:"       "\n\t"
         "subs   %0, %0, #1"                 "\n\t"
@@ -76,7 +76,9 @@ static inline void delayMicroseconds(uint32_t usec){
   {
   }
 #endif
-}
+}*/
+
+extern void delayMicroseconds(uint32_t usec);
 
 /*
 __attribute__((naked)) static void delay_loop(unsigned n)
