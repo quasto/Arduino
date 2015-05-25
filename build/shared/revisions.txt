@@ -5,6 +5,7 @@
 
 [libraries]
 * Fixed delayMicroseconds()
+* remapped Serial and serial5
 
 ARDUINO 1.7.3 - 2015.05.04
 
