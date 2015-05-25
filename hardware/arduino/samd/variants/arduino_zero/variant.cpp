@@ -204,5 +204,5 @@ SERCOM sercom3( SERCOM3 ) ;
 SERCOM sercom4( SERCOM4 ) ;
 SERCOM sercom5( SERCOM5 ) ;
 
-Uart Serial( &sercom0, 0, 1 ) ;
-Uart Serial5( &sercom5, 36, 35 ) ;
+Uart Serial( &sercom5, 36, 35 ) ;
+Uart Serial5( &sercom0, 0, 1 ) ;
