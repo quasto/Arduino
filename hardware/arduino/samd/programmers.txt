@@ -1,0 +1,2 @@
+zeroedbg.name=M0 Pro Programming Port
+zeroedbg.program.tool=openocd

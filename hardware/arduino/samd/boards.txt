@@ -22,6 +22,12 @@ arduino_zero_pro_bl_dbg.build.vid=0x2a03
 arduino_zero_pro_bl_dbg.build.pid=0x804d
 arduino_zero_pro_bl_dbg.build.section.start=0x4000
 
+arduino_zero_pro_bl_dbg.bootloader.tool=openocd
+arduino_zero_pro_bl_dbg.bootloader.cmd_unprotect=at91samd bootloader 0
+arduino_zero_pro_bl_dbg.bootloader.cmd_protect=at91samd bootloader 16384
+arduino_zero_pro_bl_dbg.bootloader.cmd_protect_verify=at91samd bootloader
+arduino_zero_pro_bl_dbg.bootloader.file=zero/Bootloader_zero_pro_150504.hex
+
 #ARDUINO ZERO PRO (WITH) BOOTLOADER - NATIVE PORT
 arduino_zero_pro_bl.name=Arduino Zero Pro (Native USB Port)
 arduino_zero_pro_bl.vid.0=0x2a03
@@ -48,3 +54,5 @@ arduino_zero_pro_bl.build.vid=0x2a03
 arduino_zero_pro_bl.build.pid=0x804d
 arduino_zero_pro_bl.build.section.start=0x4000
 arduino_zero_pro_bl.build.emu.mcu=atmega2560
+arduino_zero_pro_bl.bootloader.tool=avrdude
+arduino_zero_pro_bl.bootloader.low_fuses=0xff

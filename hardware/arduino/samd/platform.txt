@@ -93,14 +93,14 @@ tools.openocd.upload.params.verbose=
 tools.openocd.upload.params.quiet=
 tools.openocd.upload.pattern="{path}/{cmd}" -s "{path}/share/openocd/scripts/" -f ../../../../../arduino/samd/variants/{build.variant}/{build.openocdscript} -c "program {{{build.path}/{build.project_name}.bin}} verify {build.section.start}" -c reset -c exit
 
-#tools.openocd.erase.params.verbose=
-#tools.openocd.erase.params.quiet=
-#tools.openocd.erase.params.pattern=
-
-#tools.openocd.bootloader.params.verbose=
-#tools.openocd.bootloader.params.quiet=
-#tools.openocd.bootloader.pattern=
-
+tools.openocd.erase.params.verbose=
+tools.openocd.erase.params.quiet=
+#tools.openocd.erase.pattern="{path}/{cmd}" -s "{path}/share/openocd/scripts/" -f ../../../../../arduino/samd/variants/{build.variant}/{build.openocdscript} -c "init" -c "halt" -c "{bootloader.cmd_unprotect}" -c "reset"  -c "exit"
+tools.openocd.erase.pattern=
+tools.openocd.bootloader.params.verbose=
+tools.openocd.bootloader.params.quiet=
+#tools.openocd.bootloader.pattern="{path}/{cmd}" -s "{path}/share/openocd/scripts/" -f ../../../../../arduino/samd/variants/{build.variant}/{build.openocdscript} -c "init" -c "halt" -c "program {bootloader.file} verify" -c "{bootloader.cmd_protect}" -c "{bootloader.cmd_protect_verify}" -c "reset"  -c "exit"
+tools.openocd.bootloader.pattern="{path}/{cmd}" -s "{path}/share/openocd/scripts/" -f ../../../../../arduino/samd/variants/{build.variant}/{build.openocdscript} -c "init" -c "halt"  -c "{bootloader.cmd_unprotect}" -c "program ../../../../../arduino/samd/bootloaders/{bootloader.file} verify" -c "{bootloader.cmd_protect}" -c "{bootloader.cmd_protect_verify}" -c "reset"  -c "exit"
 # AVR Uploader/Programmers tools
 # ------------------------------
 
