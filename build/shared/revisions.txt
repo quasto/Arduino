@@ -2,10 +2,14 @@
 * modified platform.txt for fix GITHUB issue #3
 * add SAM D21 based boards (Zero Pro/ M0 Pro / M0) bootloader burning
 * update upload pattern for Zero Pro/ M0 Pro
+* deleted Zero Pro bootloader
+* add M0 pro Bootlolader
+* add M0 bootloader
 
 [libraries]
 * Fixed delayMicroseconds()
 * remapped Serial and serial5
+* add tone
 
 ARDUINO 1.7.3 - 2015.05.04
 
