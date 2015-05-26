@@ -19,5 +19,19 @@
 #ifndef _WIRING_TONE_
 #define _WIRING_TONE_
 
+#include <stdint.h>
+#include <stdlib.h>
+#include <math.h>
+#include "wiring_digital.h"
+
+void TC5_Handler( void );
+
+void tone(uint8_t pin, unsigned int frequency, unsigned long duration = 0);
+void noTone(uint8_t pin);
+void set_timer5(void);
+
+
+
+
 
 #endif /* _WIRING_TONE_ */
