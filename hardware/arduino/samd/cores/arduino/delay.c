@@ -51,7 +51,7 @@ void delay( uint32_t ms )
   }
 
   uint32_t start = _ulTickCount ;
-
+  //SerialUSB.println(start);
 
   do
   {
@@ -65,6 +65,23 @@ void SysTick_Handler( void )
   _ulTickCount++ ;
 }
 
+/*void delayMicroseconds(uint32_t usec)
+{
+	if ( usec == 0 )
+  {
+    return ;
+  }
+  
+  uint32_t now= micros();
+  //uint32_t now= SysTick->VAL;
+  do
+  {
+	  yield();
+  }while((micros() -now) < usec);
+  
+   
+}*/
+
 
 void delayMicroseconds(uint32_t usec)
 {
@@ -76,10 +93,33 @@ void delayMicroseconds(uint32_t usec)
 	usec_val=usec * 1.0;
 	
 	if(usec <= 20)
-        {
+       {
             
 			  
-			if(usec <=9)
+			if(usec == 1) limit = usec * 2;
+			else if(usec == 2) limit = usec * 6;
+			else if(usec == 3) limit = usec * 8;
+			else if(usec == 4) limit = usec * 9;
+			else if(usec == 5) limit = usec * 9;
+			/*else if(usec == 6) limit = usec * 10;
+			else if(usec == 7) limit = usec * 10;
+			else if(usec == 8) limit = usec * 10;
+			else if(usec == 9) limit = usec * 10;
+			else if(usec == 10) limit = usec * 10;
+			else if(usec == 11) limit = usec * 10;
+			else if(usec == 12) limit = usec * 10;
+			else if(usec == 13) limit = usec * 10;*/
+			else limit = usec * 11;
+			//if(usec > 6) limit = usec * 9;
+			
+			//if (usec > 7) limit= usec * 9;
+			
+			for(i=0; i <= limit; i++);
+                {
+                  asm("NOP");
+                }  
+                return;
+			/*if(usec <=9)
               {
                 limit = usec * 8;
                 for(i=0; i <= limit; i++)
@@ -96,15 +136,15 @@ void delayMicroseconds(uint32_t usec)
                   asm("NOP");
                 }  
                 return;
-              }  
+              }  */
          }  
     else if(usec <=1363)
 	{
 		presc=TC_CTRLA_PRESCALER_DIV1;
 		div_val=1.0;
 	        ref = (uint16_t)(usec_val * 48.0 / div_val);
-                if(usec > 20) ref= ref - 921;
-		
+                if((usec > 20) & (usec <=60)) ref= ref - 905;
+			if(usec > 60) ref= ref - 921;
 	}	
 
         else if((usec > 1363)  & (usec <= 5461))
