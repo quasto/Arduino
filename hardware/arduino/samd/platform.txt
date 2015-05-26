@@ -91,7 +91,7 @@ tools.openocd.cmd.macosx=bin/openocd
 
 tools.openocd.upload.params.verbose=
 tools.openocd.upload.params.quiet=
-tools.openocd.upload.pattern="{path}/{cmd}" -s "{path}/share/openocd/scripts/" -f ../../../../../arduino/samd/variants/{build.variant}/{build.openocdscript} -c "program {{{build.path}/{build.project_name}.bin}} verify {build.section.start}" -c reset -c exit
+tools.openocd.upload.pattern="{path}/{cmd}" -s "{path}/share/openocd/scripts/" -f ../../../../../arduino/samd/variants/{build.variant}/{build.openocdscript} -c "program {{{build.path}/{build.project_name}.bin}} verify {build.section.start} reset exit"
 
 tools.openocd.erase.params.verbose=
 tools.openocd.erase.params.quiet=
