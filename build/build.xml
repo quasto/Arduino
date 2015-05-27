@@ -651,7 +651,7 @@
       <param name="final_folder" value="${staging_folder}/work/${staging_hardware_folder}/tools/OpenOCD-0.9.0-arduino" />
       <param name="dest_folder" value="${staging_folder}/work/${staging_hardware_folder}/tools/" />
     </antcall>
-    <chmod perm="755" file="${staging_folder}/work/${staging_hardware_folder}/tools/OpenOCD/bin/openocd" />
+    <chmod perm="755" file="${staging_folder}/work/${staging_hardware_folder}/tools/OpenOCD-0.9.0-arduino/bin/openocd" />
   </target>
 
   <target name="linux64-build" depends="linux-build" description="Build linux (64-bit) version">
@@ -678,7 +678,7 @@
       <param name="final_folder" value="${staging_folder}/work/${staging_hardware_folder}/tools/OpenOCD-0.9.0-arduino" />
       <param name="dest_folder" value="${staging_folder}/work/${staging_hardware_folder}/tools/" />
     </antcall>
-    <chmod perm="755" file="${staging_folder}/work/${staging_hardware_folder}/tools/OpenOCD/bin/openocd" />
+    <chmod perm="755" file="${staging_folder}/work/${staging_hardware_folder}/tools/OpenOCD-0.9.0-arduino/bin/openocd" />
   </target>
 
   <target name="linux32-run" depends="linux32-build" description="Run Linux (32-bit) version">
