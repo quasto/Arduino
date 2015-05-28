@@ -1,17 +1,24 @@
-﻿ARDUINO 1.7.x - 2015.05.27
+﻿ARDUINO 1.7.4 - 2015.05.28
 
 [ide]
 * modified platform.txt for fix GITHUB issue #3
 * add SAM D21 based boards (Zero Pro/ M0 Pro / M0) bootloader burning
 * update upload pattern for Zero Pro/ M0 Pro
-* deleted Zero Pro bootloader
-* add M0 pro Bootlolader
+
+[bootladers]
+* replace Zero Pro bootloader with M0 pro Bootlolader
 * add M0 bootloader
 
+[core]
+* Fixed delayMicroseconds for SAMD
+* remapped Serial and serial5 for SAMD
+* add tone and pulse for SAMD
+* fix DAC pinMode for SAMD
+* fix variant.cpp (issue #11)
+
 [libraries]
-* Fixed delayMicroseconds()
-* remapped Serial and serial5
-* add tone
+* add SD and servo for SAMD
+
 
 ARDUINO 1.7.3 - 2015.05.04
 
