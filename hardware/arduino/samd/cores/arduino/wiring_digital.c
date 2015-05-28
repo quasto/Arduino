@@ -153,9 +153,11 @@ void pinMode( uint32_t ulPin, uint32_t ulMode )
 		  // Waiting for synchronization
 		}
 	  }
-      PORT->Group[g_APinDescription[ulPin].ulPort].PINCFG[g_APinDescription[ulPin].ulPin].reg&=~(uint8_t)(PORT_PINCFG_INEN) ;
-      PORT->Group[g_APinDescription[ulPin].ulPort].DIRSET.reg = (uint32_t)(1<<g_APinDescription[ulPin].ulPin) ;
-    break ;
+	  else{
+		PORT->Group[g_APinDescription[ulPin].ulPort].PINCFG[g_APinDescription[ulPin].ulPin].reg&=~(uint8_t)(PORT_PINCFG_INEN) ;
+		PORT->Group[g_APinDescription[ulPin].ulPort].DIRSET.reg = (uint32_t)(1<<g_APinDescription[ulPin].ulPin) ;
+	  }
+	break ;
 
     default:
       // do nothing
