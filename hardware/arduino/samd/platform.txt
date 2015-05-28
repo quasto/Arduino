@@ -86,7 +86,7 @@ recipe.size.regex=\.text\s+([0-9]+).*
 
 tools.openocd.cmd=bin/openocd
 tools.openocd.cmd.windows=bin/openocd.exe
-tools.openocd.path={runtime.ide.path}/hardware/tools/OpenOCD-0.9.0-dev-arduino
+tools.openocd.path={runtime.ide.path}/hardware/tools/OpenOCD-0.9.0-arduino
 tools.openocd.cmd.macosx=bin/openocd
 
 tools.openocd.upload.params.verbose=
