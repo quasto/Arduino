@@ -36,9 +36,15 @@ yunmini.sketch.name="Arduino Yun Mini"
 zero_pro.edbg.name="Atmel Corp. EDBG USB Port"
 zero_pro.usbport.name="Arduino Zero PRO Native Port"
 zero_pro_boot.usbport.name="Arduino Zero PRO (Bootloader Mode) Native Port"
+m0_pro.edbg.name="Atmel Corp. EDBG USB Port"
+m0_pro.usbport.name="Arduino M0 PRO Native Port"
+m0_pro_boot.usbport.name="Arduino M0 PRO (Bootloader Mode) Native Port"
+
+m0.usbport.name="Arduino M0 Native Port"
+m0_boot.usbport.name="Arduino M0 (Bootloader Mode) Native Port"
 
 microADK.bootloader.name="Arduino Micro ADK bootloader"
-microADK.sketch.name="Arduino Micro ADK”
+microADK.sketch.name="Arduino Micro ADK"
 
 [DefaultInstall]
 CopyINF=arduino-org.inf
@@ -91,6 +97,12 @@ DefaultDestDir=12
 %zero_pro.edbg.name%=DriverInstall, USB\VID_03EB&PID_2111&MI_01
 %zero_pro.usbport.name%=DriverInstall, USB\VID_2A03&PID_804D
 %zero_pro_boot.usbport.name%=DriverInstall, USB\VID_2A03&PID_004D
+%m0_pro.edbg.name%=DriverInstall, USB\VID_03EB&PID_2111&MI_01
+%m0_pro.usbport.name%=DriverInstall, USB\VID_2A03&PID_804F
+%m0_pro_boot.usbport.name%=DriverInstall, USB\VID_2A03&PID_004F
+
+%m0.usbport.name%=DriverInstall, USB\VID_2A03&PID_804E
+%m0_boot.usbport.name%=DriverInstall, USB\VID_2A03&PID_004E
 
 %microADK.bootloader.name%=DriverInstall, USB\VID_2A03&PID_003A
 %microADK.sketch.name%=DriverInstall, USB\VID_2A03&PID_803A&MI_00
@@ -127,6 +139,12 @@ DefaultDestDir=12
 %zero_pro.edbg.name%=DriverInstall, USB\VID_03EB&PID_2111&MI_01
 %zero_pro_boot.usbport.name%=DriverInstall, USB\VID_2A03&PID_004D
 %zero_pro.usbport.name%=DriverInstall, USB\VID_2A03&PID_804D
+%m0_pro.edbg.name%=DriverInstall, USB\VID_03EB&PID_2111&MI_01
+%m0_pro.usbport.name%=DriverInstall, USB\VID_2A03&PID_804F
+%m0_pro_boot.usbport.name%=DriverInstall, USB\VID_2A03&PID_004F
+
+%m0.usbport.name%=DriverInstall, USB\VID_2A03&PID_804E
+%m0_boot.usbport.name%=DriverInstall, USB\VID_2A03&PID_004E
 
 %microADK.bootloader.name%=DriverInstall, USB\VID_2A03&PID_003A
 %microADK.sketch.name%=DriverInstall, USB\VID_2A03&PID_803A&MI_00
@@ -160,6 +178,13 @@ DefaultDestDir=12
 %zero_pro.edbg.name%=DriverInstall, USB\VID_03EB&PID_2111&MI_01
 %zero_pro_boot.usbport.name%=DriverInstall, USB\VID_2A03&PID_004D
 %zero_pro.usbport.name%=DriverInstall, USB\VID_2A03&PID_804D
+
+%m0_pro.edbg.name%=DriverInstall, USB\VID_03EB&PID_2111&MI_01
+%m0_pro.usbport.name%=DriverInstall, USB\VID_2A03&PID_804F
+%m0_pro_boot.usbport.name%=DriverInstall, USB\VID_2A03&PID_004F
+
+%m0.usbport.name%=DriverInstall, USB\VID_2A03&PID_804E
+%m0_boot.usbport.name%=DriverInstall, USB\VID_2A03&PID_004E
 
 %microADK.bootloader.name%=DriverInstall, USB\VID_2A03&PID_003A
 %microADK.sketch.name%=DriverInstall, USB\VID_2A03&PID_803A&MI_00
