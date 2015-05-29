@@ -11,27 +11,27 @@
       <matches string="${os.version}" pattern="^10.[56]." />
     </and>
   </condition>
-  <condition property="platform" value="macosx-java8"><os family="mac" /></condition>
+  <condition property="platform" value="macosx-java7"><os family="mac" /></condition>
   <condition property="platform" value="windows"><os family="windows" /></condition>
   <condition property="platform" value="linux32"><os family="unix" arch="i386" /></condition>
   <condition property="platform" value="linux64"><os family="unix" arch="amd64" /></condition>
 
   <condition property="macosx"><equals arg1="${platform}" arg2="macosx" /></condition>
-  <condition property="macosx"><equals arg1="${platform}" arg2="macosx-java8" /></condition>
-  <condition property="macosx-java8"><equals arg1="${platform}" arg2="macosx-java8" /></condition>
+  <condition property="macosx"><equals arg1="${platform}" arg2="macosx-java7" /></condition>
+  <condition property="macosx-java7"><equals arg1="${platform}" arg2="macosx-java7" /></condition>
   <condition property="windows"><equals arg1="${platform}" arg2="windows" /></condition>
   <condition property="linux32"><equals arg1="${platform}" arg2="linux32" /></condition>
   <condition property="linux64"><equals arg1="${platform}" arg2="linux64" /></condition>
   <condition property="linux"><equals arg1="${platform}" arg2="linux32" /></condition>
   <condition property="linux"><equals arg1="${platform}" arg2="linux64" /></condition>
 
-  <condition property="staging_folder" value="macosx"><equals arg1="${platform}" arg2="macosx-java8" /></condition>
+  <condition property="staging_folder" value="macosx"><equals arg1="${platform}" arg2="macosx-java7" /></condition>
   <condition property="staging_folder" value="macosx"><equals arg1="${platform}" arg2="macosx" /></condition>
   <condition property="staging_folder" value="windows"><equals arg1="${platform}" arg2="windows" /></condition>
   <condition property="staging_folder" value="linux"><equals arg1="${platform}" arg2="linux32" /></condition>
   <condition property="staging_folder" value="linux"><equals arg1="${platform}" arg2="linux64" /></condition>
 
-  <condition property="staging_hardware_folder" value="Arduino.app/Contents/Java/hardware"><equals arg1="${platform}" arg2="macosx-java8" /></condition>
+  <condition property="staging_hardware_folder" value="Arduino.app/Contents/Java/hardware"><equals arg1="${platform}" arg2="macosx-java7" /></condition>
   <condition property="staging_hardware_folder" value="Arduino.app/Contents/Resources/Java/hardware"><equals arg1="${platform}" arg2="macosx" /></condition>
   <condition property="staging_hardware_folder" value="hardware"><equals arg1="${platform}" arg2="windows" /></condition>
   <condition property="staging_hardware_folder" value="hardware"><equals arg1="${platform}" arg2="linux32" /></condition>
@@ -195,7 +195,7 @@
   <!-- Mac OS X      -->
   <!-- - - - - - - - -->
 
-  <target name="macosx-java8-clean" depends="macosx-clean" description="Clean Mac OS X build"/>
+  <target name="macosx-java7-clean" depends="macosx-clean" description="Clean Mac OS X build"/>
 
   <target name="macosx-clean" depends="subprojects-clean" description="Clean Mac OS X build">
     <delete dir="macosx/work" />
@@ -246,7 +246,7 @@
 
   </target>
 
-  <target name="macosx-java8-build" if="macosx" depends="revision-check, macosx-checkos, subprojects-build" description="Build Mac OS X version">
+  <target name="macosx-java7-build" if="macosx" depends="revision-check, macosx-checkos, subprojects-build" description="Build Mac OS X version">
     <antcall target="unzip">
       <param name="archive_file" value="${staging_folder}/appbundler-1.0ea-arduino2.jar.zip" />
       <param name="archive_url" value="http://download.arduino.org/tools/appbundler-1.0ea-arduino2.jar.zip" />
@@ -393,7 +393,7 @@
     <antcall target="macosx-run-common"/>
   </target>
 
-  <target name="macosx-java8-run" depends="macosx-java8-build" description="Run Mac OS X version">
+  <target name="macosx-java7-run" depends="macosx-java7-build" description="Run Mac OS X version">
     <antcall target="macosx-run-common"/>
   </target>
 
@@ -401,7 +401,7 @@
     <antcall target="macosx-debug-common"/>
   </target>
 
-  <target name="macosx-java8-debug" depends="macosx-java8-build" description="Run Mac OS X version">
+  <target name="macosx-java7-debug" depends="macosx-java7-build" description="Run Mac OS X version">
     <antcall target="macosx-debug-common"/>
   </target>
 
@@ -478,7 +478,7 @@
     <antcall target="macosx-dist-common"/>
   </target>
 
-  <target name="macosx-java8-dist" if="macosx" depends="macosx-java8-build" description="Create a downloadable .zip for the Mac OS X version">
+  <target name="macosx-java7-dist" if="macosx" depends="macosx-java7-build" description="Create a downloadable .zip for the Mac OS X version">
     <antcall target="macosx-dist-common"/>
   </target>
 
