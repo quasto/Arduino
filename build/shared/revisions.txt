@@ -1,4 +1,4 @@
-﻿ARDUINO 1.7.4 - 2015.05.28
+ARDUINO 1.7.4 - 2015.05.28
 
 [ide]
 * modified platform.txt for fix GITHUB issue #3
