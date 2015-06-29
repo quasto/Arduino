@@ -102,18 +102,18 @@ void init( void )
   GCLK->CLKCTRL.reg = GCLK_CLKCTRL_ID( GCM_ADC ) | // Generic Clock ADC
                       GCLK_CLKCTRL_GEN_GCLK0 | // Generic Clock Generator 0 is source
                       GCLK_CLKCTRL_CLKEN ;
-
+  // Setting CTRLB
   ADC->CTRLB.reg = ADC_CTRLB_PRESCALER_DIV128 |     // Divide Clock by 128.
-                   ADC_CTRLB_RESSEL_12BIT;        // Result on 12 bits
-
-  ADC->INPUTCTRL.reg = ADC_INPUTCTRL_MUXNEG_GND |  ADC_INPUTCTRL_GAIN_DIV2 ;   // No Negative input (Internal Ground)
-
+                   ADC_CTRLB_RESSEL_10BIT;        // Result on 10 bits	
+  //ADC->INPUTCTRL.reg = ADC_INPUTCTRL_MUXNEG_GND |  ADC_INPUTCTRL_GAIN_DIV2 ;   // No Negative input (Internal Ground)
+    ADC->INPUTCTRL.reg = ADC_INPUTCTRL_MUXNEG_GND |  ADC_INPUTCTRL_GAIN_1X ;   // gain setted to 1
   // Averaging (see table 31-2 p.816 datasheet)
   ADC->AVGCTRL.reg = ADC_AVGCTRL_SAMPLENUM_2 |    // 2 samples
                      ADC_AVGCTRL_ADJRES(0x01ul);  // Adjusting result by 1
   
+  ADC->SAMPCTRL.reg = 0x3f;	
   ADC->REFCTRL.reg = ADC_REFCTRL_REFSEL_INTVCC1; // RReference intvcc1 [default]
-
+ 
   ADC->CTRLA.bit.ENABLE = 1; // Enable ADC
   while( ADC->STATUS.bit.SYNCBUSY == 1 )
   {

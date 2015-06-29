@@ -140,6 +140,9 @@ void pinMode( uint32_t ulPin, uint32_t ulMode )
       // Set pin to input mode with pull-up resistor enabled
       PORT->Group[g_APinDescription[ulPin].ulPort].PINCFG[g_APinDescription[ulPin].ulPin].reg=(uint8_t)(PORT_PINCFG_INEN|PORT_PINCFG_PULLEN) ;
       PORT->Group[g_APinDescription[ulPin].ulPort].DIRCLR.reg = (uint32_t)(1<<g_APinDescription[ulPin].ulPin) ;
+	  
+	  //pull-upconfig
+	  PORT->Group[g_APinDescription[ulPin].ulPort].OUTSET.reg = (uint32_t)(1<<g_APinDescription[ulPin].ulPin) ;	
     break ;
 
     case OUTPUT:

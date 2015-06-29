@@ -1,3 +1,21 @@
+ARDUINO 1.7.5 - 2015.XX.XX
+
+[ide]
+
+
+[bootladers]
+
+
+[core]
+Fixed Serial/Serial5 bug (issue #13) in M0 / M0 Pro / Zero Pro 
+Fixed analogReadResolution in M0 / M0 Pro / Zero Pro
+Fixed analogReference in M0 / M0 Pro / Zero Pro
+
+[libraries]
+
+
+
+
 ARDUINO 1.7.4 - 2015.05.28
 
 [ide]

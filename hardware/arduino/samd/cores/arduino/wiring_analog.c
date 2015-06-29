@@ -30,6 +30,13 @@ static int DAC_RESOLUTION = 10;
 
 void analogReadResolution(int res) {
 	_readResolution = res;
+	while( ADC->STATUS.bit.SYNCBUSY == 1 )
+  {
+    // Waiting for synchroinization
+  }
+	if(res == 8) ADC->CTRLB.bit.RESSEL= ADC_CTRLB_RESSEL_8BIT_Val; 
+	else if(res == 10) ADC->CTRLB.bit.RESSEL= ADC_CTRLB_RESSEL_10BIT_Val;   
+	else ADC->CTRLB.bit.RESSEL= ADC_CTRLB_RESSEL_12BIT_Val; 
 }
 
 void analogWriteResolution(int res) {
@@ -48,21 +55,41 @@ static inline uint32_t mapResolution(uint32_t value, uint32_t from, uint32_t to)
 void analogReference( eAnalogReference ulMode )
 {
 
-  // ATTENTION : On this board the default is note 5volts or 3.3volts BUT 1volt
+  // ATTENTION : On this board the default is not 5volts or 3.3volts BUT 1.65 volt
 
+   
+   
+   ADC->CTRLA.bit.ENABLE = 0; // Enable ADC
+  while( ADC->STATUS.bit.SYNCBUSY == 1 )
+  {
+    // Waiting for synchroinization
+  }
   switch(ulMode)
   {
     case AR_DEFAULT:
       //default:
-      ADC->REFCTRL.reg = ADC_REFCTRL_REFSEL_INTVCC1;
+      
+	  ADC->INPUTCTRL.bit.GAIN = ADC_INPUTCTRL_GAIN_DIV2_Val;
+	  ADC->REFCTRL.bit.REFSEL = ADC_REFCTRL_REFSEL_INTVCC1_Val;
+	  break;
     case AR_INTERNAL:
+	  ADC->INPUTCTRL.bit.GAIN = ADC_INPUTCTRL_GAIN_1X_Val; 
       ADC->REFCTRL.bit.REFSEL = ADC_REFCTRL_REFSEL_INT1V_Val;
       break;
 
     case AR_EXTERNAL:
+	  ADC->INPUTCTRL.bit.GAIN = ADC_INPUTCTRL_GAIN_1X_Val; 
       ADC->REFCTRL.bit.REFSEL = ADC_REFCTRL_REFSEL_AREFA_Val;
       break;
+  }ADC->CTRLA.bit.ENABLE = 1; // Enable ADC
+  while( ADC->STATUS.bit.SYNCBUSY == 1 )
+  {
+    // Waiting for synchroinization
   }
+  
+  
+  
+  
 }
 
 uint32_t analogRead( uint32_t ulPin )
@@ -98,7 +125,7 @@ uint32_t analogRead( uint32_t ulPin )
     // Waiting for synchronization
   }
   
-  valueRead = mapResolution(valueRead, ADC_RESOLUTION, _readResolution);
+  //valueRead = mapResolution(valueRead, ADC_RESOLUTION, _readResolution);
   return valueRead;
   
 }
