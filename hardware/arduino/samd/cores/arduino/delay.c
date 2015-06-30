@@ -51,7 +51,6 @@ void delay( uint32_t ms )
   }
 
   uint32_t start = _ulTickCount ;
-  //SerialUSB.println(start);
 
   do
   {
@@ -64,24 +63,6 @@ void SysTick_Handler( void )
   // Increment tick count each ms
   _ulTickCount++ ;
 }
-
-/*void delayMicroseconds(uint32_t usec)
-{
-	if ( usec == 0 )
-  {
-    return ;
-  }
-  
-  uint32_t now= micros();
-  //uint32_t now= SysTick->VAL;
-  do
-  {
-	  yield();
-  }while((micros() -now) < usec);
-  
-   
-}*/
-
 
 void delayMicroseconds(uint32_t usec)
 {
@@ -101,42 +82,13 @@ void delayMicroseconds(uint32_t usec)
 			else if(usec == 3) limit = usec * 8;
 			else if(usec == 4) limit = usec * 9;
 			else if(usec == 5) limit = usec * 9;
-			/*else if(usec == 6) limit = usec * 10;
-			else if(usec == 7) limit = usec * 10;
-			else if(usec == 8) limit = usec * 10;
-			else if(usec == 9) limit = usec * 10;
-			else if(usec == 10) limit = usec * 10;
-			else if(usec == 11) limit = usec * 10;
-			else if(usec == 12) limit = usec * 10;
-			else if(usec == 13) limit = usec * 10;*/
 			else limit = usec * 11;
-			//if(usec > 6) limit = usec * 9;
-			
-			//if (usec > 7) limit= usec * 9;
-			
+           
 			for(i=0; i <= limit; i++);
                 {
                   asm("NOP");
                 }  
                 return;
-			/*if(usec <=9)
-              {
-                limit = usec * 8;
-                for(i=0; i <= limit; i++)
-                {
-                  asm("NOP");
-                }  
-                return;
-              }
-            else
-              {
-                limit = usec * 9;
-                for(i=0; i < limit; i++)
-                {
-                  asm("NOP");
-                }  
-                return;
-              }  */
          }  
     else if(usec <=1363)
 	{
@@ -187,60 +139,6 @@ void delayMicroseconds(uint32_t usec)
 	  	
 return;
 }
-
-/*void delayMicroseconds(uint32_t usec)
-{
-	unsigned int presc=0, ref=0,div=0;
-	double ref_val=0.0, div_val=0.0, usec_val=0.0;
-	if (usec <=0) return;
-	usec_val=usec * 1.0;
-	
-	if(usec <=5461)
-	{
-		presc=TC_CTRLA_PRESCALER_DIV4;
-		div_val=4.0;
-		div=4;
-		
-	}	
-	else if((usec > 5461) & (usec <= 10922))
-	{	
-		presc=TC_CTRLA_PRESCALER_DIV8;
-		div_val=8.0;
-		div=8;
-	}	
-	else if((usec > 10922) & (usec <= 21845))
-	{
-		presc=TC_CTRLA_PRESCALER_DIV16;
-		div_val=16.0;
-		div=16;
-	}	
-	else if(usec > 21845)
-	{
-		presc=TC_CTRLA_PRESCALER_DIV64;
-		div_val=64.0;
-		div=64;
-	}
-    else;
-
-    ref_val=((usec_val * 48.0) / div_val);
-	ref=(uint16_t)ref_val;
-	SerialUSB.println(ref);
-	GCLK->CLKCTRL.reg = (uint16_t) (GCLK_CLKCTRL_CLKEN | GCLK_CLKCTRL_GEN_GCLK0 | GCLK_CLKCTRL_ID( GCM_TC4_TC5 ));
-	
-	 TC4->COUNT16.CTRLA.reg &=~(TC_CTRLA_ENABLE);
-      TC4->COUNT16.CTRLA.reg = TC_CTRLA_MODE_COUNT16;
-      TC4->COUNT16.CTRLA.reg |= div;
-      TC4->COUNT16.READREQ.reg = 0x4002;
-      TC4->COUNT16.CTRLA.reg |= TC_CTRLA_ENABLE;
-	  
-	  while(TC4->COUNT16.COUNT.reg < ref);
-	  TC4->COUNT16.CTRLA.reg &=~(TC_CTRLA_ENABLE);
-	
-return;
-	
-	
-	
-}*/
 
 #ifdef __cplusplus
 }

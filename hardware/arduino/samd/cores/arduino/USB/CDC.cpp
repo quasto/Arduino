@@ -231,10 +231,6 @@ size_t Serial_::write(const uint8_t *buffer, size_t size)
 	 bytes sent before the user opens the connection or after
 	 the connection is closed are lost - just like with a UART. */
 
-	// TODO - ZE - check behavior on different OSes and test what happens if an
-	// open connection isn't broken cleanly (cable is yanked out, host dies
-	// or locks up, or host virtual serial port hangs)
-//	if (_usbLineInfo.lineState > 0)  // Problem with Windows(R)
 	{
 		uint32_t r = USBD_Send(CDC_ENDPOINT_IN, buffer, size);
 
@@ -262,6 +258,7 @@ size_t Serial_::write(uint8_t c) {
 // actually ready to receive and display the data.
 // We add a short delay before returning to fix a bug observed by Federico
 // where the port is configured (lineState != 0) but not quite opened.
+
 Serial_::operator bool()
 {
 	// this is here to avoid spurious opening after upload

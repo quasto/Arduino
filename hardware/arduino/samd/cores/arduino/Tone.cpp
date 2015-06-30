@@ -30,6 +30,7 @@ Version Modified By Date     Comments
 0006    D Mellis    09/12/29 Replaced objects with functions
 0007    M Sproul    10/08/29 Changed #ifdefs from cpu to register
 0008    S Kanemoto  12/06/22 Fixed for Leonardo by @maris_HY
+0009    Arduino.org 15/06/30 Add M0/M0 Pro support
 *************************************************/
 
 
@@ -43,7 +44,7 @@ uint8_t pin_sound=0;
 void tone(uint8_t pin, unsigned int frequency, unsigned long duration)
 {
 	
-	unsigned int tim_per=0, duty=0,presc_tc=0, presc_tcc=0;
+  unsigned int tim_per=0, duty=0,presc_tc=0, presc_tcc=0;
   double freq=0.0,div=0.0;
   uint8_t isTC = 0 ;
   uint8_t Channelx ;
@@ -56,7 +57,6 @@ void tone(uint8_t pin, unsigned int frequency, unsigned long duration)
   
   if(duration !=0)
   {
-	  //count_duration= 4 * duration;
 	  count_duration= 188 * duration;
 	  set_timer5();
 	  pin_sound=pin;
@@ -65,72 +65,65 @@ void tone(uint8_t pin, unsigned int frequency, unsigned long duration)
   switch ( g_APinDescription[pin].ulPWMChannel )  //TC or TCC selection
     {
       case PWM3_CH0 :
-        TCx = TC3 ;    //non funziona
-        Channelx = 0 ;
-        isTC = 1 ;
+            TCx = TC3 ;     // not work
+            Channelx = 0 ;
+            isTC = 1 ;
       break;
 
-      case  PWM3_CH1:  //non funziona
-      TCx = TC3 ;
-      Channelx = 1;
-      isTC = 1;
+      case PWM3_CH1:        // not work
+            TCx = TC3 ;
+            Channelx = 1;
+            isTC = 1;
       break;
 
-      case  PWM0_CH0 :
-      TCCx = TCC0;
-      Channelx = 0;
+      case PWM0_CH0 :
+            TCCx = TCC0;
+            Channelx = 0;
       break;
 
-      case  PWM0_CH1 :
-      TCCx = TCC0;
-      Channelx = 1;
+      case PWM0_CH1 :
+            TCCx = TCC0;
+            Channelx = 1;
       break;
 
-      case  PWM0_CH4 :
-      //TCx=TC3;
-      //Channelx=0;
-      //isTC=1;
-      TCCx = TCC0;   //non funziona
-      //Channelx = 4;
-      Channelx = 0;
+      case PWM0_CH4 :
+            TCCx = TCC0;
+            Channelx = 0;
       break;
 
-      case  PWM0_CH5 :
-      TCCx = TCC0;
-      //Channelx = 5;   //non funziona
-      Channelx = 1;
+      case PWM0_CH5 :
+            TCCx = TCC0;
+            Channelx = 1;
       break;
 
-      case  PWM0_CH6 :
-      TCCx = TCC0;
-      //Channelx = 6;
-      Channelx = 2;
+      case PWM0_CH6 :
+            TCCx = TCC0;
+            Channelx = 2;
       break;
 
-      case  PWM0_CH7 :
-      TCCx = TCC0;
-      //Channelx = 7;
-      Channelx = 3;
+      case PWM0_CH7 :
+            TCCx = TCC0;
+            Channelx = 3;
       break;
 
-      case  PWM1_CH0 :
-      TCCx = TCC1;
-      Channelx = 0;
+      case PWM1_CH0 :
+            TCCx = TCC1;
+            Channelx = 0;
       break;
 
-      case  PWM1_CH1 :
-      TCCx = TCC1;
-      Channelx = 1;
+      case PWM1_CH1 :
+            TCCx = TCC1;
+            Channelx = 1;
       break;
 
-      case  PWM2_CH0 :
-      TCCx = TCC2;
-      Channelx = 0;
+      case PWM2_CH0 :
+            TCCx = TCC2;
+            Channelx = 0;
       break;
 
-      case  PWM2_CH1 :
-      TCCx = TCC2;
-      Channelx = 1;
+      case PWM2_CH1 :
+            TCCx = TCC2;
+            Channelx = 1;
       break;
     }
   
@@ -248,10 +241,10 @@ void tone(uint8_t pin, unsigned int frequency, unsigned long duration)
 
 void noTone(uint8_t pin)
 {
-	if((pin >= 2) & (pin <= 7)) TCC0->CTRLA.reg &=~(TCC_CTRLA_ENABLE);   //disable TCC0
-	else if((pin == 8) | (pin == 9)) TCC1->CTRLA.reg &=~(TCC_CTRLA_ENABLE);   //disable TCC1
-	else if ((pin == 10) | (pin ==12)) TC3->COUNT8.CTRLA.reg &=~(TC_CTRLA_ENABLE);  //disable TC3
-	else if ((pin == 11) | (pin == 13)) TCC2->CTRLA.reg &=~(TCC_CTRLA_ENABLE);    // disable TCC2
+	if((pin >= 2) & (pin <= 7)) TCC0->CTRLA.reg &=~(TCC_CTRLA_ENABLE);              // disable TCC0
+	else if((pin == 8) | (pin == 9)) TCC1->CTRLA.reg &=~(TCC_CTRLA_ENABLE);         // disable TCC1
+	else if ((pin == 10) | (pin ==12)) TC3->COUNT8.CTRLA.reg &=~(TC_CTRLA_ENABLE);  // disable TC3
+	else if ((pin == 11) | (pin == 13)) TCC2->CTRLA.reg &=~(TCC_CTRLA_ENABLE);      // disable TCC2
 	else;
 
 return;	
@@ -259,20 +252,17 @@ return;
 
 void set_timer5(void)
 {
-	 NVIC_DisableIRQ( TC5_IRQn ) ;
+    NVIC_DisableIRQ( TC5_IRQn ) ;
     NVIC_ClearPendingIRQ( TC5_IRQn ) ;
     NVIC_SetPriority( TC5_IRQn, 0 ) ;
-    //NVIC_EnableIRQ( TC5_IRQn ) ;
 
 	//GCLK->CLKCTRL.reg = (uint16_t) (GCLK_CLKCTRL_CLKEN | GCLK_CLKCTRL_GEN_GCLK3 | GCLK_CLKCTRL_ID( GCM_TC4_TC5 ));
 	GCLK->CLKCTRL.reg = (uint16_t) (GCLK_CLKCTRL_CLKEN | GCLK_CLKCTRL_GEN_GCLK0 | GCLK_CLKCTRL_ID( GCM_TC4_TC5 ));
 	
-	 TC5->COUNT8.CTRLA.reg &=~(TC_CTRLA_ENABLE);
-      //TC5->COUNT8.CTRLA.reg |= TC_CTRLA_MODE_COUNT8 | TC_CTRLA_PRESCALER_DIV8;
-	  TC5->COUNT8.CTRLA.reg |= TC_CTRLA_MODE_COUNT8 | TC_CTRLA_PRESCALER_DIV1;
-      //TC5->COUNT8.READREQ.reg = 0x4002;
-      TC5->COUNT8.INTENSET.reg |= TC_INTENSET_OVF;
-      TC5->COUNT8.CTRLA.reg |= TC_CTRLA_ENABLE;
+	TC5->COUNT8.CTRLA.reg &=~(TC_CTRLA_ENABLE);
+    TC5->COUNT8.CTRLA.reg |= TC_CTRLA_MODE_COUNT8 | TC_CTRLA_PRESCALER_DIV1;
+    TC5->COUNT8.INTENSET.reg |= TC_INTENSET_OVF;
+    TC5->COUNT8.CTRLA.reg |= TC_CTRLA_ENABLE;
     NVIC_EnableIRQ( TC5_IRQn ) ;
 }
 
@@ -285,11 +275,11 @@ void TC5_Handler( void )
     if(count_duration == 0)
     {
       noTone(pin_sound);
-      TC5->COUNT8.CTRLA.reg &=~(TC_CTRLA_ENABLE);  //disable TC5
+      TC5->COUNT8.CTRLA.reg &=~(TC_CTRLA_ENABLE);  // disable TC5
 	  
     }
   }	
-    TC5->COUNT8.INTFLAG.reg |= ~(TC_INTFLAG_OVF);   //reset flag
+    TC5->COUNT8.INTFLAG.reg |= ~(TC_INTFLAG_OVF);   // reset flag
    
 }  
 

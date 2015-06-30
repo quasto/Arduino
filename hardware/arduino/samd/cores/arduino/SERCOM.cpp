@@ -305,18 +305,6 @@ bool SERCOM::isDataRegisterEmptySPI()
 	return sercom->SPI.INTFLAG.bit.DRE;
 }
 
-//bool SERCOM::isTransmitCompleteSPI()
-//{
-//	//TXC : Transmit complete
-//	return sercom->SPI.INTFLAG.bit.TXC;
-//}
-//
-//bool SERCOM::isReceiveCompleteSPI()
-//{
-//	//RXC : Receive complete
-//	return sercom->SPI.INTFLAG.bit.RXC;
-//}
-
 uint8_t SERCOM::calculateBaudrateSynchronous(uint32_t baudrate)
 {
 	return SERCOM_FREQ_REF / (2 * baudrate) - 1;
@@ -386,11 +374,11 @@ void SERCOM::initSlaveWIRE( uint8_t ucAddress )
   sercom->I2CM.CTRLB.bit.QCEN = 1 ;
 
   sercom->I2CS.ADDR.reg = SERCOM_I2CS_ADDR_ADDR( ucAddress & 0x7Ful ) | // 0x7F, select only 7 bits
-                          SERCOM_I2CS_ADDR_ADDRMASK( 0x3FFul ) ;    // 0x3FF all bits set
+                          SERCOM_I2CS_ADDR_ADDRMASK( 0x3FFul ) ;        // 0x3FF all bits set
 
   // Set the interrupt register
-  sercom->I2CS.INTENSET.reg = SERCOM_I2CS_INTENSET_AMATCH | // Address Match
-                              SERCOM_I2CS_INTENSET_DRDY ;   // Data Ready
+  sercom->I2CS.INTENSET.reg = SERCOM_I2CS_INTENSET_AMATCH |             // Address Match
+                              SERCOM_I2CS_INTENSET_DRDY ;               // Data Ready
 
   while ( sercom->I2CM.SYNCBUSY.bit.SYSOP != 0 )
   {
@@ -406,15 +394,11 @@ void SERCOM::initMasterWIRE( uint32_t baudrate )
   resetWIRE() ;
 
   // Set master mode and enable SCL Clock Stretch mode (stretch after ACK bit)
-  sercom->I2CM.CTRLA.reg =  SERCOM_I2CM_CTRLA_MODE( I2C_MASTER_OPERATION )/* |
-                            SERCOM_I2CM_CTRLA_SCLSM*/ ;
+  sercom->I2CM.CTRLA.reg =  SERCOM_I2CM_CTRLA_MODE( I2C_MASTER_OPERATION );
 
   // Enable Smart mode and Quick Command
-  //sercom->I2CM.CTRLB.reg =  SERCOM_I2CM_CTRLB_SMEN /*| SERCOM_I2CM_CTRLB_QCEN*/ ;
-
 
   // Enable all interrupts
-//  sercom->I2CM.INTENSET.reg = SERCOM_I2CM_INTENSET_MB | SERCOM_I2CM_INTENSET_SB | SERCOM_I2CM_INTENSET_ERROR ;
 
   // Synchronous arithmetic baudrate
   sercom->I2CM.BAUD.bit.BAUD = SystemCoreClock / ( 2 * baudrate) - 1 ;
@@ -626,7 +610,7 @@ void SERCOM::initClockNVIC( void )
 	NVIC_SetPriority (IdNvic, (1<<__NVIC_PRIO_BITS) - 1);  /* set Priority */
 
 	//Setting clock
-	GCLK->CLKCTRL.reg = GCLK_CLKCTRL_ID( clockId ) | // Generic Clock 0 (SERCOMx)
+	GCLK->CLKCTRL.reg = GCLK_CLKCTRL_ID( clockId ) |       // Generic Clock 0 (SERCOMx)
 						          GCLK_CLKCTRL_GEN_GCLK0 | // Generic Clock Generator 0 is source
 						          GCLK_CLKCTRL_CLKEN ;
 

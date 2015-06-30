@@ -16,10 +16,8 @@
   Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-//#include "Arduino.h"
 #include "wiring_digital.h"
 #include "WVariant.h"
-//#include "Arduino.h"
 
 #ifdef __cplusplus
  extern "C" {
@@ -39,8 +37,6 @@ int pinPeripheral( uint32_t ulPin, EPioType ulPeripheral )
     case PIO_INPUT_PULLUP:
     case PIO_OUTPUT:
       // Disable peripheral muxing, done in pinMode
-//			PORT->Group[g_APinDescription[ulPin].ulPort].PINCFG[g_APinDescription[ulPin].ulPin].bit.PMUXEN = 0 ;
-
       // Configure pin mode, if requested
       if ( ulPeripheral == PIO_INPUT )
       {
@@ -60,7 +56,7 @@ int pinPeripheral( uint32_t ulPin, EPioType ulPeripheral )
           }
           else
           {
-            // PIO_DIGITAL, do we have to do something as all cases are covered?
+              // do notting
           }
         }
       }
@@ -91,7 +87,7 @@ int pinPeripheral( uint32_t ulPin, EPioType ulPeripheral )
                                                                     PORT_WRCONFIG_PINMASK( g_APinDescription[ulPin].ulPin - 16 ) ;
       }
 #else
-      if ( g_APinDescription[ulPin].ulPin & 1 ) // is pin odd?
+      if ( g_APinDescription[ulPin].ulPin & 1 )
       {
         uint32_t temp ;
 
@@ -102,7 +98,7 @@ int pinPeripheral( uint32_t ulPin, EPioType ulPeripheral )
         // Enable port mux
         PORT->Group[g_APinDescription[ulPin].ulPort].PINCFG[g_APinDescription[ulPin].ulPin].reg |= PORT_PINCFG_PMUXEN ;
       }
-      else // even pin
+      else
       {
         uint32_t temp ;
 

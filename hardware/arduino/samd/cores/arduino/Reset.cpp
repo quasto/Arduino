@@ -25,14 +25,10 @@ extern "C" {
 
 __attribute__ ((long_call, section (".ramfunc")))
 static void banzai() {
-	// Disable all interrupts
-	__disable_irq();
+    // Disable all interrupts
+    __disable_irq();
 
-  // Reset the device
-	//NVIC_SystemReset() ;
-	//cpu_irq_disable();
-	//SCB->AIRCR = ((0x05FA<<16)|0b100); //reset cpu
-	WDT->CONFIG.bit.PER = 0x0; //8 clock cycles period for WDT
+  	WDT->CONFIG.bit.PER = 0x0; //8 clock cycles period for WDT
 	WDT->CTRL.reg |= WDT_CTRL_ENABLE; //enable watchdog
 	while(1)
 	{

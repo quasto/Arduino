@@ -80,23 +80,23 @@ typedef enum _EPortType
 
 typedef enum _EExt_Interrupts
 {
-  EXTERNAL_INT_0 = 0, // Available on pin 11
-  EXTERNAL_INT_1, // Available on pin 13
-  EXTERNAL_INT_2, // Available on pins 10, A0, A5
-  EXTERNAL_INT_3, // Available on pin 12
-  EXTERNAL_INT_4, // Available on pin 6, 8, A3
-  EXTERNAL_INT_5, // Available on pin 7, 9, A4
-  EXTERNAL_INT_6, // Available on pin 16
-  EXTERNAL_INT_7, // Available on pin 17
-  EXTERNAL_INT_8, // Available on pin A1
-  EXTERNAL_INT_9, // Available on pin 3, A2
-  EXTERNAL_INT_10, // Available on pin 0, 21
-  EXTERNAL_INT_11, // Available on pin 1, 20
-  EXTERNAL_INT_12, // Available on pin 18
-  EXTERNAL_INT_13, // Available on pin EDBG_GPIO0 (43)
-  EXTERNAL_INT_14, // Available on pin 4
-  EXTERNAL_INT_15, // Available on pin 5
-  EXTERNAL_INT_NMI, // Available on pin 2
+  EXTERNAL_INT_0 = 0,   // Available on pin 11
+  EXTERNAL_INT_1,       // Available on pin 13
+  EXTERNAL_INT_2,       // Available on pins 10, A0, A5
+  EXTERNAL_INT_3,       // Available on pin 12
+  EXTERNAL_INT_4,       // Available on pin 6, 8, A3
+  EXTERNAL_INT_5,       // Available on pin 7, 9, A4
+  EXTERNAL_INT_6,       // Available on pin 16
+  EXTERNAL_INT_7,       // Available on pin 17
+  EXTERNAL_INT_8,       // Available on pin A1
+  EXTERNAL_INT_9,       // Available on pin 3, A2
+  EXTERNAL_INT_10,      // Available on pin 0, 21
+  EXTERNAL_INT_11,      // Available on pin 1, 20
+  EXTERNAL_INT_12,      // Available on pin 18
+  EXTERNAL_INT_13,      // Available on pin EDBG_GPIO0 (43)
+  EXTERNAL_INT_14,      // Available on pin 4
+  EXTERNAL_INT_15,      // Available on pin 5
+  EXTERNAL_INT_NMI,     // Available on pin 2
   EXTERNAL_NUM_INTERRUPTS,
   NOT_AN_INTERRUPT = -1,
   EXTERNAL_INT_NONE = NOT_AN_INTERRUPT,
@@ -108,18 +108,18 @@ typedef enum _EExt_Interrupts
 typedef enum _EPioType
 {
   PIO_NOT_A_PIN=-1,  /* Not under control of a peripheral. */
-  PIO_EXTINT,     /* The pin is controlled by the associated signal of peripheral A. */
-  PIO_ANALOG,     /* The pin is controlled by the associated signal of peripheral B. */
-  PIO_SERCOM,     /* The pin is controlled by the associated signal of peripheral C. */
-  PIO_SERCOM_ALT, /* The pin is controlled by the associated signal of peripheral D. */
-  PIO_TIMER,      /* The pin is controlled by the associated signal of peripheral E. */
-  PIO_TIMER_ALT,  /* The pin is controlled by the associated signal of peripheral F. */
-  PIO_COM,        /* The pin is controlled by the associated signal of peripheral G. */
-  PIO_AC_CLK,     /* The pin is controlled by the associated signal of peripheral H. */
-  PIO_DIGITAL,    /* The pin is controlled by PORT. */
-  PIO_INPUT,        /* The pin is controlled by PORT and is an input. */
-  PIO_INPUT_PULLUP, /* The pin is controlled by PORT and is an input with internal pull-up resistor enabled. */
-  PIO_OUTPUT,       /* The pin is controlled by PORT and is an output. */
+  PIO_EXTINT,        /* The pin is controlled by the associated signal of peripheral A. */
+  PIO_ANALOG,        /* The pin is controlled by the associated signal of peripheral B. */
+  PIO_SERCOM,        /* The pin is controlled by the associated signal of peripheral C. */
+  PIO_SERCOM_ALT,    /* The pin is controlled by the associated signal of peripheral D. */
+  PIO_TIMER,         /* The pin is controlled by the associated signal of peripheral E. */
+  PIO_TIMER_ALT,     /* The pin is controlled by the associated signal of peripheral F. */
+  PIO_COM,           /* The pin is controlled by the associated signal of peripheral G. */
+  PIO_AC_CLK,        /* The pin is controlled by the associated signal of peripheral H. */
+  PIO_DIGITAL,       /* The pin is controlled by PORT. */
+  PIO_INPUT,         /* The pin is controlled by PORT and is an input. */
+  PIO_INPUT_PULLUP,  /* The pin is controlled by PORT and is an input with internal pull-up resistor enabled. */
+  PIO_OUTPUT,        /* The pin is controlled by PORT and is an output. */
 
   PIO_PWM=PIO_TIMER,
   PIO_PWM_ALT=PIO_TIMER_ALT,

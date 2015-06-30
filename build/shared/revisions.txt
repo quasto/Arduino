@@ -7,9 +7,9 @@ ARDUINO 1.7.5 - 2015.XX.XX
 
 
 [core]
-Fixed Serial/Serial5 bug (issue #13) in M0 / M0 Pro / Zero Pro 
-Fixed analogReadResolution in M0 / M0 Pro / Zero Pro
-Fixed analogReference in M0 / M0 Pro / Zero Pro
+Fixed Serial/Serial5 bug (issue #13) in M0 / M0 Pro 
+Fixed analogReadResolution in M0 / M0 Pro
+Fixed analogReference in M0 / M0 Pro
 
 [libraries]
 

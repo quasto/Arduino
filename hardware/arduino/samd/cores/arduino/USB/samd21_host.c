@@ -28,15 +28,6 @@
  */
 
 #include <stdio.h>
-// #include <stdint.h>
-// #include <string.h>
-// 
-// #include "variant.h"
-// #include "USB_host.h"
-// #include "USB/samd21_host.h"
-// #include "sam.h"
-
-//#if SAM3XA_SERIES
 
 #ifdef HOST_DEFINED
 
@@ -156,87 +147,6 @@ void UHD_Init(void)
 	NVIC_EnableIRQ((IRQn_Type) USB_IRQn);
 }
 
-// /**
-//  * \brief Initialize the UOTGHS host driver.
-//  */
-// void UHD_Init(void)
-// {
-// //	irqflags_t flags;
-// 
-// 	// To avoid USB interrupt before end of initialization
-// //	flags = cpu_irq_save();
-// 
-// 	// Setup USB Host interrupt callback
-// //	UHD_SetStack(&UHD_ISR);
-// 
-// 	// Enables the USB Clock
-// 	pmc_enable_upll_clock();
-// 	pmc_switch_udpck_to_upllck(0); // div=0+1
-// 	pmc_enable_udpck();
-// 	pmc_enable_periph_clk(ID_UOTGHS);
-// 
-// 	// Always authorize asynchronous USB interrupts to exit of sleep mode
-// 	// For SAM3 USB wake up device except BACKUP mode
-// 	NVIC_SetPriority((IRQn_Type) ID_UOTGHS, 0);
-// 	NVIC_EnableIRQ((IRQn_Type) ID_UOTGHS);
-// 
-// 	// ID pin not used then force host mode
-// 	otg_disable_id_pin();
-// 	udd_force_host_mode();
-// 
-// 	// Signal is active low (because all SAM3X Pins are high after startup)
-// 	// Hence VBOF must be low after connection request to power up the remote device
-// 	// uhd_set_vbof_active_low();
-// 
-// 	// According to the Arduino Due circuit the VBOF must be active high to power up the remote device
-// 	uhd_set_vbof_active_high();
-// 
-// 	otg_enable_pad();
-// 	otg_enable();
-// 
-// 	otg_unfreeze_clock();
-// 
-// 	// Check USB clock
-// 	while (!Is_otg_clock_usable())
-// 		;
-// 
-// 	// Clear all interrupts that may have been set by a previous host mode
-// 	UOTGHS->UOTGHS_HSTICR = UOTGHS_HSTICR_DCONNIC | UOTGHS_HSTICR_DDISCIC
-// 			| UOTGHS_HSTICR_HSOFIC  | UOTGHS_HSTICR_HWUPIC
-// 			| UOTGHS_HSTICR_RSMEDIC | UOTGHS_HSTICR_RSTIC
-// 			| UOTGHS_HSTICR_RXRSMIC;
-// 
-// 	otg_ack_vbus_transition();
-// 
-// 	// Enable Vbus change and error interrupts
-// 	// Disable automatic Vbus control after Vbus error
-// 	Set_bits(UOTGHS->UOTGHS_CTRL,
-// 		UOTGHS_CTRL_VBUSHWC | UOTGHS_CTRL_VBUSTE | UOTGHS_CTRL_VBERRE);
-// 
-// 	uhd_enable_vbus();
-// 
-// 	// Force Vbus interrupt when Vbus is always high
-// 	// This is possible due to a short timing between a Host mode stop/start.
-// 	if (Is_otg_vbus_high())
-// 	{
-// 		otg_raise_vbus_transition();
-// 	}
-// 
-// 	// Enable main control interrupt
-// 	// Connection, SOF and reset
-// 	UOTGHS->UOTGHS_HSTIER = UOTGHS_HSTICR_DCONNIC;
-// 
-// 	otg_freeze_clock();
-// 
-// 	uhd_state = UHD_STATE_NO_VBUS;
-// 
-// //	cpu_irq_restore(flags);
-// }
-
-
-/**
- * \brief Interrupt sub routine for USB Host state machine management.
- */
 //static void UHD_ISR(void)
 void USB_Handler(void)
 {
@@ -330,9 +240,6 @@ void USB_Handler(void)
 			uhd_stop_reset();
 			// Disable wakeup/resumes interrupts,
 			// in case of disconnection during suspend mode
-			//UOTGHS->UOTGHS_HSTIDR = UOTGHS_HSTIDR_HWUPIEC
-			//		| UOTGHS_HSTIDR_RSMEDIEC
-			//		| UOTGHS_HSTIDR_RXRSMIEC;
 			uhd_ack_connection();
 			uhd_enable_connection_int();
 			uhd_state = UHD_STATE_DISCONNECTED;
@@ -451,7 +358,6 @@ uint32_t UHD_Pipe_Alloc(uint32_t ul_dev_addr, uint32_t ul_dev_ep, uint32_t ul_ty
 
 	USB->HOST.HostPipe[pipe_num].PINTENSET.reg = USB_HOST_PINTENSET_TRCPT_Msk;
 	USB->HOST.HostPipe[pipe_num].PINTENSET.reg = USB_HOST_PINTENSET_TRFAIL | USB_HOST_PINTENSET_PERR;
-//	USB->HOST.HostPipe[pipe_num].PINTENSET.reg = USB_HOST_PINTENSET_TXSTP;
 	USB->HOST.HostPipe[pipe_num].PINTENSET.reg = USB_HOST_PINTENSET_STALL;
 
 	return 1;
@@ -528,22 +434,6 @@ void UHD_Pipe_Write(uint32_t ul_pipe, uint32_t ul_size, uint8_t* data)
 
 
 	return 1;
-
-
-// 	volatile uint8_t *ptr_ep_data = 0;
-// 	uint32_t i = 0;
-// 
-// 	// Check pipe
-// 	if (!Is_uhd_pipe_enabled(ul_pipe))
-// 	{
-// 		// Endpoint not valid
-// 		TRACE_UOTGHS_HOST(printf("/!\\ UHD_EP_Send : pipe is not enabled!\r\n");)
-// 		return;
-// 	}
-// 
-// 	ptr_ep_data = (volatile uint8_t *)&uhd_get_pipe_fifo_access(ul_pipe, 8);
-// 	for (i = 0; i < ul_size; ++i)
-// 		*ptr_ep_data++ = *data++;
 }
 
 /**
@@ -559,29 +449,6 @@ void UHD_Pipe_Send(uint32_t ul_pipe, uint32_t ul_token_type)
 
 	// Unfreeze pipe
 	USB->HOST.HostPipe[pipe_num].PSTATUSCLR.reg = USB_HOST_PSTATUSCLR_PFREEZE;
-
-// 	// Check pipe
-// 	if (!Is_uhd_pipe_enabled(ul_pipe))
-// 	{
-// 		// Endpoint not valid
-// 		TRACE_UOTGHS_HOST(printf("/!\\ UHD_EP_Send : pipe %lu is not enabled!\r\n", ul_pipe);)
-// 		return;
-// 	}
-// 
-// 	// Set token type for zero length packet
-// 	// When actually using the FIFO, pipe token MUST be configured first
-// 	uhd_configure_pipe_token(ul_pipe, ul_token_type);
-// 
-// 	// Clear interrupt flags
-// 	uhd_ack_setup_ready(ul_pipe);
-// 	uhd_ack_in_received(ul_pipe);
-// 	uhd_ack_out_ready(ul_pipe);
-// 	uhd_ack_short_packet(ul_pipe);
-// 	uhd_ack_nak_received(ul_pipe);
-// 
-// 	// Send actual packet
-// 	uhd_ack_fifocon(ul_pipe);
-// 	uhd_unfreeze_pipe(ul_pipe);
 }
 
 /**
@@ -612,47 +479,8 @@ uint32_t UHD_Pipe_Is_Transfer_Complete(uint32_t ul_pipe, uint32_t ul_token_type)
 		_uhd_ctrl_request_end(UHD_TRANS_NOERROR);
 		break;
 	}
-
-
-// 	// Check for transfer completion depending on token type
-// 	switch (ul_token_type)
-// 	{
-// 		case UOTGHS_HSTPIPCFG_PTOKEN_SETUP:
-// 			if (Is_uhd_setup_ready(ul_pipe))
-// 			{
-// 				uhd_freeze_pipe(ul_pipe);
-// 				uhd_ack_setup_ready(ul_pipe);
-// 				return 1;
-// 			}
-// 
-// 		case UOTGHS_HSTPIPCFG_PTOKEN_IN:
-// 			if (Is_uhd_in_received(ul_pipe))
-// 			{
-// 				// In case of low USB speed and with a high CPU frequency,
-// 				// a ACK from host can be always running on USB line
-// 				// then wait end of ACK on IN pipe.
-// 				while(!Is_uhd_pipe_frozen(ul_pipe))
-// 					;
-// 
-// 				// IN packet received
-// 				uhd_ack_in_received(ul_pipe);
-// 
-// 				return 1;
-// 			}
-// 
-// 		case UOTGHS_HSTPIPCFG_PTOKEN_OUT:
-// 			if (Is_uhd_out_ready(ul_pipe))
-// 			{
-// 				// OUT packet sent
-// 				uhd_freeze_pipe(ul_pipe);
-// 				uhd_ack_out_ready(ul_pipe);
-// 
-// 				return 1;
-// 			}
-// 	}
-// 
 	return 0;
 }
 
-#endif /* SAM3XA_SERIES HOST_DEFINED */
+#endif 
 

@@ -30,7 +30,6 @@
 #include <stdarg.h>
 #include <sys/types.h>
 #include <sys/stat.h>
-//#include <unistd.h>
 
 /*----------------------------------------------------------------------------
  *        Exported functions
@@ -38,8 +37,7 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-/*
-*/
+
 extern void _exit( int status ) ;
 
 extern int link( char *cOld, char *cNew ) ;

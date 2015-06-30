@@ -23,14 +23,6 @@
 extern "C"{
 #endif // __cplusplus
 
-// moved to wiring_digital.h
-//#define LOW             (0x0)
-//#define HIGH            (0x1)
-
-//#define INPUT           (0x0)
-//#define OUTPUT          (0x1)
-//#define INPUT_PULLUP    (0x2)
-
 #define true            (0x1)
 #define false           (0x0)
 
@@ -48,23 +40,6 @@ enum BitOrder {
 	LSBFIRST = 0,
 	MSBFIRST = 1
 };
-
-// moved to WInterrupts.h
-////      LOW 0
-////      HIGH 1
-//#define CHANGE 2
-//#define FALLING 3
-//#define RISING 4
-//
-//#define DEFAULT 1
-//#define EXTERNAL 0
-
-// undefine stdlib's abs if encountered
-
-//#ifdef abs
-//#undef abs
-//#endif // abs
-
 
 #ifndef min
 #define min(a,b) ((a)<(b)?(a):(b))

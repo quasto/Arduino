@@ -63,8 +63,6 @@ typedef enum
 {
 	UART_TX_PAD_0 = 0x0ul,	//Only for UART
 	UART_TX_PAD_2 = 0x1ul,  //Only for UART
-	//UART_TX_PAD_1 = 0x0ul,	//DON'T USE
-	//UART_TX_PAD_3 = 0x1ul	//DON'T USE
 } SercomUartTXPad;
 
 typedef enum
@@ -169,10 +167,10 @@ class SERCOM
 
 		void resetWIRE( void ) ;
 		void enableWIRE( void ) ;
-    void disableWIRE( void );
-    void prepareNackBitWIRE( void ) ;
-    void prepareAckBitWIRE( void ) ;
-    void prepareCommandBitsWire(SercomMasterCommandWire cmd);
+        void disableWIRE( void );
+        void prepareNackBitWIRE( void ) ;
+        void prepareAckBitWIRE( void ) ;
+        void prepareCommandBitsWire(SercomMasterCommandWire cmd);
 		bool startTransmissionWIRE(uint8_t address, SercomWireReadWriteFlag flag) ;
 		bool sendDataMasterWIRE(uint8_t data) ;
 		bool sendDataSlaveWIRE(uint8_t data) ;
@@ -184,7 +182,7 @@ class SERCOM
 		bool isRestartDetectedWIRE( void ) ;
 		bool isAddressMatch( void ) ;
 		bool isMasterReadOperationWIRE( void ) ;
-    bool isRXNackReceivedWIRE( void ) ;
+        bool isRXNackReceivedWIRE( void ) ;
 		int availableWIRE( void ) ;
 		uint8_t readDataWIRE( void ) ;
 

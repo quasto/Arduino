@@ -16,9 +16,7 @@
   Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-//#include "Arduino.h"
 #include "variant.h"
-//#include "wiring_constants.h"
 #include "wiring_digital.h"
 #include "wiring.h"
 
@@ -31,25 +29,6 @@ extern "C" {
  * It is switched to 48MHz in the Reset Handler (startup.c)
  */
 uint32_t SystemCoreClock=1000000ul ;
-
-/*
-void calibrateADC()
-{
-  volatile uint32_t valeur = 0;
-
-  for(int i = 0; i < 5; ++i)
-  {
-    ADC->SWTRIG.bit.START = 1;
-    while( ADC->INTFLAG.bit.RESRDY == 0 || ADC->STATUS.bit.SYNCBUSY == 1 )
-    {
-      // Waiting for a complete conversion and complete synchronization
-    }
-
-    valeur += ADC->RESULT.bit.RESULT;
-  }
-
-  valeur = valeur/5;
-}*/
 
 /*
  * Arduino Zero board initialization
@@ -70,10 +49,10 @@ void init( void )
     while ( 1 ) ;
   }
 
-  // Clock PORT for Digital I/O
+//  Clock PORT for Digital I/O
 //	PM->APBBMASK.reg |= PM_APBBMASK_PORT ;
 //
-//  // Clock EIC for I/O interrupts
+//  Clock EIC for I/O interrupts
 //	PM->APBAMASK.reg |= PM_APBAMASK_EIC ;
 
   // Clock SERCOM for Serial
@@ -91,28 +70,22 @@ void init( void )
 	  pinMode( ul, INPUT ) ;
   }
 
-  // Initialize Serial port U(S)ART pins
-  // Todo
-
-  // Initialize USB pins
-  // Todo
-
   // Initialize Analog Controller
   // Setting clock
-  GCLK->CLKCTRL.reg = GCLK_CLKCTRL_ID( GCM_ADC ) | // Generic Clock ADC
-                      GCLK_CLKCTRL_GEN_GCLK0 | // Generic Clock Generator 0 is source
+  GCLK->CLKCTRL.reg = GCLK_CLKCTRL_ID( GCM_ADC ) |  // Generic Clock ADC
+                      GCLK_CLKCTRL_GEN_GCLK0 |      // Generic Clock Generator 0 is source
                       GCLK_CLKCTRL_CLKEN ;
   // Setting CTRLB
   ADC->CTRLB.reg = ADC_CTRLB_PRESCALER_DIV128 |     // Divide Clock by 128.
-                   ADC_CTRLB_RESSEL_10BIT;        // Result on 10 bits	
-  //ADC->INPUTCTRL.reg = ADC_INPUTCTRL_MUXNEG_GND |  ADC_INPUTCTRL_GAIN_DIV2 ;   // No Negative input (Internal Ground)
-    ADC->INPUTCTRL.reg = ADC_INPUTCTRL_MUXNEG_GND |  ADC_INPUTCTRL_GAIN_1X ;   // gain setted to 1
+                   ADC_CTRLB_RESSEL_10BIT;          // Result on 10 bits
+    ADC->INPUTCTRL.reg = ADC_INPUTCTRL_MUXNEG_GND | // No Negative input (Internal Ground)
+                         ADC_INPUTCTRL_GAIN_1X;     // Gain setted to 1
   // Averaging (see table 31-2 p.816 datasheet)
-  ADC->AVGCTRL.reg = ADC_AVGCTRL_SAMPLENUM_2 |    // 2 samples
-                     ADC_AVGCTRL_ADJRES(0x01ul);  // Adjusting result by 1
+  ADC->AVGCTRL.reg = ADC_AVGCTRL_SAMPLENUM_2 |      // 2 samples
+                     ADC_AVGCTRL_ADJRES(0x01ul);    // Adjusting result by 1
   
   ADC->SAMPCTRL.reg = 0x3f;	
-  ADC->REFCTRL.reg = ADC_REFCTRL_REFSEL_INTVCC1; // RReference intvcc1 [default]
+  ADC->REFCTRL.reg = ADC_REFCTRL_REFSEL_INTVCC1;    // Reference intvcc1 [default]
  
   ADC->CTRLA.bit.ENABLE = 1; // Enable ADC
   while( ADC->STATUS.bit.SYNCBUSY == 1 )
@@ -122,24 +95,14 @@ void init( void )
 
   // Initialize DAC
   // Setting clock
-  GCLK->CLKCTRL.reg = GCLK_CLKCTRL_ID( GCM_DAC ) | // Generic Clock ADC
-                      GCLK_CLKCTRL_GEN_GCLK0 | // Generic Clock Generator 0 is source
+  GCLK->CLKCTRL.reg = GCLK_CLKCTRL_ID( GCM_DAC ) |  // Generic Clock ADC
+                      GCLK_CLKCTRL_GEN_GCLK0 |      // Generic Clock Generator 0 is source
                       GCLK_CLKCTRL_CLKEN ;
 
 
-  DAC->CTRLB.reg = DAC_CTRLB_REFSEL_AVCC | // Using the 3.3V reference
-                   DAC_CTRLB_EOEN;  // External Output Enable (Vout)
+  DAC->CTRLB.reg = DAC_CTRLB_REFSEL_AVCC |          // Using the 3.3V reference
+                   DAC_CTRLB_EOEN;                  // External Output Enable (Vout)
   DAC->DATA.reg = 0x3FFul;
-
-  // Enable DAC
-  /*
-  DAC->CTRLA.bit.ENABLE = 0;
-
-  while(DAC->STATUS.bit.SYNCBUSY != 0)
-  {
-    // Waiting for synchronization
-  }*/
-
 }
 
 #ifdef __cplusplus

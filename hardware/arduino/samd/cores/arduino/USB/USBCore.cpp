@@ -25,7 +25,6 @@
 #include "USBDesc.h"
 #include "USBAPI.h"
 
-//#define TRACE_CORE(x)	x
 #define TRACE_CORE(x)
 
 //==================================================================
@@ -508,9 +507,9 @@ void USB_Handler(void)
 						// Send the device status
      					TRACE_CORE(puts(">>> EP0 Int: GET_STATUS\r\n");)
 						// Check current configuration for power mode (if device is configured)
-						// TODO
+						
 						// Check if remote wake-up is enabled
-						// TODO
+						
 						data_to_be_send[0]=0;
 						data_to_be_send[1]=0;
 						UDD_Send(0, data_to_be_send, 2);
@@ -673,7 +672,7 @@ void USB_Handler(void)
                 }
             }
             i++;
-			if( i> USB_EPT_NUM) break;  // fire exit
+			if( i> USB_EPT_NUM) break;  // exit
         }
 	}
 }
@@ -692,9 +691,6 @@ void USBD_Flush(uint32_t ep)
 uint32_t USBD_Connected(void)
 {
 	uint8_t f = UDD_GetFrameNumber();
-
-    //delay(3); JCB
-
 	return f != UDD_GetFrameNumber();
 }
 

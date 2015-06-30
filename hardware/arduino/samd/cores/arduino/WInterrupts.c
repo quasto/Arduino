@@ -56,16 +56,6 @@ static void __initialize()
   // Enable GCLK for IEC (External Interrupt Controller)
   GCLK->CLKCTRL.reg = (uint16_t) (GCLK_CLKCTRL_CLKEN | GCLK_CLKCTRL_GEN_GCLK0 | GCLK_CLKCTRL_ID( GCM_EIC )) ;
 
-/* Shall we do that?
-  // Do a software reset on EIC
-  EIC->CTRL.SWRST.bit = 1 ;
-
-  while ( (EIC->CTRL.SWRST.bit == 1) && (EIC->STATUS.SYNCBUSY.bit == 1) )
-  {
-    // Waiting for synchronisation
-  }
-*/
-
   // Enable EIC
   EIC->CTRL.bit.ENABLE = 1 ;
 
@@ -80,8 +70,7 @@ static void __initialize()
  * \brief Specifies a named Interrupt Service Routine (ISR) to call when an interrupt occurs.
  *        Replaces any previous function that was attached to the interrupt.
  */
-//void attachInterrupt( uint32_t ulPin, void (*callback)(void), EExt_IntMode mode )
-//void attachInterrupt( uint32_t ulPin, voidFuncPtr callback, EExt_IntMode mode )
+
 void attachInterrupt( uint32_t ulPin, voidFuncPtr callback, uint32_t ulMode )
 {
   static int enabled = 0 ;
@@ -128,22 +117,18 @@ void attachInterrupt( uint32_t ulPin, voidFuncPtr callback, uint32_t ulMode )
       break ;
 
       case HIGH:
-        // EIC->CONFIG[ulConfig].reg = EIC_CONFIG_SENSE0_HIGH_Val << ((digitalPinToInterrupt( ulPin ) >> ulConfig ) << ulPos) ;
         EIC->CONFIG[ulConfig].reg |= EIC_CONFIG_SENSE0_HIGH_Val << ulPos ;
       break ;
 
       case CHANGE:
-        // EIC->CONFIG[ulConfig].reg = EIC_CONFIG_SENSE0_BOTH_Val << ((digitalPinToInterrupt( ulPin ) >> ulConfig ) << ulPos) ;
         EIC->CONFIG[ulConfig].reg |= EIC_CONFIG_SENSE0_BOTH_Val << ulPos ;
       break ;
 
       case FALLING:
-        // EIC->CONFIG[ulConfig].reg = EIC_CONFIG_SENSE0_FALL_Val << ((digitalPinToInterrupt( ulPin ) >> ulConfig ) << ulPos) ;
         EIC->CONFIG[ulConfig].reg |= EIC_CONFIG_SENSE0_FALL_Val << ulPos ;
       break ;
 
       case RISING:
-        // EIC->CONFIG[ulConfig].reg = EIC_CONFIG_SENSE0_RISE_Val << ((digitalPinToInterrupt( ulPin ) >> ulConfig ) << ulPos) ;
         EIC->CONFIG[ulConfig].reg |= EIC_CONFIG_SENSE0_RISE_Val << ulPos ;
       break ;
     }

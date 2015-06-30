@@ -35,7 +35,6 @@ extern uint32_t pulseIn( uint32_t pin, uint32_t state, uint32_t timeout )
 	// the initial loop; it takes 22 clock cycles per iteration.
 	uint32_t numloops = 0;
 	uint32_t maxloops = microsecondsToClockCycles(timeout) / 22;
-	//SerialUSB.println("UNO");
 	// wait for any previous pulse to end
 	while (digitalRead(pin) == state)
 		if (numloops++ == maxloops)
