@@ -1,3 +1,15 @@
+﻿ARDUINO 1.7.6 - 2015.xx.xx
+
+[ide]
+
+
+[bootladers]
+
+
+[core]
+* Fixed Serial/serial5 for SAMD
+
+
 ARDUINO 1.7.5 - 2015.06.30
 
 [core]
