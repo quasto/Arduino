@@ -1,14 +1,9 @@
 ﻿ARDUINO 1.7.6 - 2015.xx.xx
 
-[ide]
-
-
-[bootladers]
-
-
 [core]
-* Fixed Serial/serial5 for SAMD
-
+* Fixed Serial/Serial5 bug (issue #13) - M0 / M0 Pro
+* Fixed Sercom reference in Wire.h - M0 / M0 Pro
+* Fixed DHCP Response on Ethernet2 Lib - M0 / M0 Pro
 
 ARDUINO 1.7.5 - 2015.06.30
 
