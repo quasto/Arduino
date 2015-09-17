@@ -12,6 +12,7 @@ ARDUINO 1.7.7 -
 [libraries]
 * Added 9AXES support for M0/M0 Pro. Note: Users Have to change the 9AXES address to 0x29 using M0 Pro.
 * Added TFT support for M0/M0 Pro.
+* Added RTC library for M0/M0 Pro.
 
 ARDUINO 1.7.6 - 2015.07.07
 
