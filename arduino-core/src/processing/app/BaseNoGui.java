@@ -37,9 +37,9 @@ import processing.app.packages.LibraryList;
 public class BaseNoGui {
 
   /** Version string to be used for build */
-  public static final int REVISION = 10706;
+  public static final int REVISION = 10707;
   /** Extended version string displayed on GUI */
-  static String VERSION_NAME = "1.7.6";
+  static String VERSION_NAME = "1.7.7";
 
   static File buildFolder;
 

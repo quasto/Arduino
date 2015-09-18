@@ -1,4 +1,4 @@
-ARDUINO 1.7.7 - 
+ARDUINO 1.7.7 - 2015.09.18 
 
 [core]
 * Fixed Tx and Rx Blinking during serial communication for M0/M0 Pro
