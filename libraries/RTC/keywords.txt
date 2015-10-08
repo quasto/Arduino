@@ -7,8 +7,8 @@
 #######################################
 
 RTCInt	KEYWORD1
-local_time	KEYWORD1
-local_date	KEYWORD1
+time	KEYWORD1
+date	KEYWORD1
 #######################################
 # Methods and Functions (KEYWORD2)
 #######################################
