@@ -1,13 +1,13 @@
-ARDUINO 1.7.8 - 
+ARDUINO 1.7.8 - 2015.10.29
 
 [core]
 * Fixed M0 / M0 Pro delay() - support ticket #764877
-
-[bootloaders]
-
+* Arduino M0 / M0 Pro A0 GPIO Bugfix
+* Arduino M0 / M0 Pro Interrupt Bugfix
 
 [libraries]
-
+* Arduino M0 / M0 Pro RTC (Real Time Clock)
+* Power management library (Rest) for Arduino M0 and M0 PRO boards
 
 ARDUINO 1.7.7 - 2015.09.18 
 
