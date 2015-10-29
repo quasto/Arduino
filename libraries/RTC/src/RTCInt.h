@@ -59,8 +59,8 @@ public:
 
   RTCInt() {};
   
-  TIME time;
-  DATE date;
+  TIME local_time;
+  DATE local_date;
   
   void begin(bool timeMode);
   
