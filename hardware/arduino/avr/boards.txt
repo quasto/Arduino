@@ -6,6 +6,7 @@ menu.cpu=Processor
 
 yun.name=Arduino Yún
 yun.upload.via_ssh=true
+yun.upload.ssh_tool=run-avrdude
 
 yun.vid.0=0x2341
 yun.pid.0=0x0041
@@ -47,6 +48,7 @@ yun.build.extra_flags={build.usb_flags}
 
 yunmini.name=Arduino Yún Mini
 yunmini.upload.via_ssh=true
+yunmini.upload.ssh_tool=run-avrdude
 
 yunmini.vid.0=0x2a03
 yunmini.pid.0=0x0050
@@ -84,6 +86,7 @@ yunmini.build.extra_flags={build.usb_flags}
 
 one.name=Linino One
 one.upload.via_ssh=true
+one.upload.ssh_tool=run-avrdude
 
 one.vid.0=0x2a03
 one.pid.0=0x0001

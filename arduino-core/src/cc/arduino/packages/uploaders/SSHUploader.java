@@ -90,7 +90,7 @@ public class SSHUploader extends Uploader {
 
       scpFiles(scp, ssh, sourcePath, buildPath, className, warningsAccumulator);
 
-      return runAVRDude(ssh);
+      return runRemoteTool(ssh);
     } catch (JSchException e) {
       String message = e.getMessage();
       if ("Auth cancel".equals(message) || "Auth fail".equals(message)) {
@@ -116,7 +116,21 @@ public class SSHUploader extends Uploader {
     }
   }
 
-  private boolean runAVRDude(SSH ssh) throws IOException, JSchException {
+  // private boolean runAVRDude(SSH ssh) throws IOException, JSchException {
+  //   TargetPlatform targetPlatform = BaseNoGui.getTargetPlatform();
+  //   PreferencesMap prefs = PreferencesData.getMap();
+  //   prefs.putAll(BaseNoGui.getBoardPreferences());
+  //   prefs.putAll(targetPlatform.getTool(prefs.get("upload.tool")));
+
+  //   String additionalParams = verbose ? prefs.get("upload.params.verbose") : prefs.get("upload.params.quiet");
+
+  //   boolean success = ssh.execSyncCommand("merge-sketch-with-bootloader.lua /tmp/sketch.hex", System.out, System.err);
+  //   ssh.execSyncCommand("kill-bridge");
+  //   success = success && ssh.execSyncCommand("run-avrdude /tmp/sketch.hex '" + additionalParams + "'", System.out, System.err);
+  //   return success;
+  // }
+
+  private boolean runRemoteTool(SSH ssh) throws IOException, JSchException {
     TargetPlatform targetPlatform = BaseNoGui.getTargetPlatform();
     PreferencesMap prefs = PreferencesData.getMap();
     prefs.putAll(BaseNoGui.getBoardPreferences());
@@ -126,7 +140,7 @@ public class SSHUploader extends Uploader {
 
     boolean success = ssh.execSyncCommand("merge-sketch-with-bootloader.lua /tmp/sketch.hex", System.out, System.err);
     ssh.execSyncCommand("kill-bridge");
-    success = success && ssh.execSyncCommand("run-avrdude /tmp/sketch.hex '" + additionalParams + "'", System.out, System.err);
+    success = success && ssh.execSyncCommand(prefs.get("upload.ssh_tool") + " /tmp/sketch.hex '" + additionalParams + "'", System.out, System.err);
     return success;
   }
 
