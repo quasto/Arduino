@@ -119,6 +119,43 @@ one.build.extra_flags={build.usb_flags}
 
 ##############################################################
 
+unowifi.name=Arduino Uno WiFi
+unowifi.upload.via_wifi=true
+
+unowifi.vid.0=0x2a03
+unowifi.pid.0=0x0057
+
+### START - TEST THIS PART
+#unowifi.upload.esp.tool=esp_avrdude
+unowifi.upload.wifi.port=2323
+#unowifi.upload.esp.protocol=arduino
+#unowifi.upload.esp.maximum_size=32256
+#unowifi.upload.esp.maximum_data_size=2048
+#unowifi.upload.esp.speed=115200
+### END - TEST THIS PART
+
+unowifi.upload.tool=avrdude
+unowifi.upload.protocol=arduino
+unowifi.upload.maximum_size=32256
+unowifi.upload.maximum_data_size=2048
+unowifi.upload.speed=115200
+
+unowifi.bootloader.tool=avrdude
+unowifi.bootloader.low_fuses=0xFF
+unowifi.bootloader.high_fuses=0xDE
+unowifi.bootloader.extended_fuses=0x05
+unowifi.bootloader.unlock_bits=0x3F
+unowifi.bootloader.lock_bits=0x0F
+unowifi.bootloader.file=optiboot/optiboot_atmega328.hex
+
+unowifi.build.mcu=atmega328p
+unowifi.build.f_cpu=16000000L
+unowifi.build.board=AVR_UNO
+unowifi.build.core=arduino
+unowifi.build.variant=standard
+
+##############################################################
+
 uno.name=Arduino Uno
 
 uno.vid.0=0x2341
@@ -868,4 +905,3 @@ robotMotor.build.board=AVR_ROBOT_MOTOR
 robotMotor.build.core=arduino
 robotMotor.build.variant=robot_motor
 robotMotor.build.extra_flags={build.usb_flags}
-
