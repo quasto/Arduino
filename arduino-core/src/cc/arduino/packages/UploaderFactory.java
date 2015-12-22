@@ -47,8 +47,8 @@ public class UploaderFactory {
     if ("true".equals(board.getPreferences().get("upload.via_wifi")) && port != null && "network".equals(port.getProtocol())) {      
       return new WiFiUploader(port);
     }
-
-    return new SerialUploader();
+    return null;
+    //return new SerialUploader();
   }
 
 }

@@ -191,7 +191,7 @@ public class NetworkDiscovery implements Discovery, ServiceListener, cc.arduino.
     try {
       JmDNS jmDNS = JmDNS.create(address);
       jmDNS.addServiceListener("_arduino._tcp.local.", this);
-      jmDNS.addServiceListener("_http._tcp.local.", this);
+      //jmDNS.addServiceListener("_http._tcp.local.", this);
       mappedJmDNSs.put(address, jmDNS);
     } catch (Exception e) {
       e.printStackTrace();
