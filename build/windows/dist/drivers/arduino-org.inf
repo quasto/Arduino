@@ -169,6 +169,7 @@ DefaultDestDir=12
 %micro.sketch.name%=DriverInstall, USB\VID_2A03&PID_8037&MI_00
 %unoR3.name%=DriverInstall, USB\VID_2A03&PID_0043
 %unowifi.name%=DriverInstall, USB\VID_2A03&PID_0057
+%tian.name%=DriverInstall, USB\VID_2A03&PID_0052
 %usbserial.name%=DriverInstall, USB\VID_2A03&PID_003B
 %robotControl.bootloader.name%=DriverInstall, USB\VID_2A03&PID_0038
 %robotControl.sketch.name%=DriverInstall, USB\VID_2A03&PID_8038&MI_00

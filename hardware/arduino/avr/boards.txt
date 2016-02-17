@@ -1,6 +1,7 @@
 # See: http://code.google.com/p/arduino/wiki/Platforms
 
 menu.cpu=Processor
+menu.upload=Upload Using:
 
 ##############################################################
 
@@ -120,19 +121,16 @@ one.build.extra_flags={build.usb_flags}
 ##############################################################
 
 unowifi.name=Arduino Uno WiFi
-unowifi.upload.via_wifi=true
-
-unowifi.vid.0=0x2a03
+unowifi.vid.0=0x2A03
 unowifi.pid.0=0x0057
 
-### START - TEST THIS PART
-#unowifi.upload.esp.tool=esp_avrdude
-unowifi.upload.wifi.port=2323
-#unowifi.upload.esp.protocol=arduino
-#unowifi.upload.esp.maximum_size=32256
-#unowifi.upload.esp.maximum_data_size=2048
-#unowifi.upload.esp.speed=115200
-### END - TEST THIS PART
+## ---- UNO WIFI - MCU ----
+
+unowifi.menu.upload.serial=via Serial
+unowifi.menu.upload.serial.upload.tool=avrdude
+
+unowifi.menu.upload.mcuota=via OTA
+unowifi.menu.upload.mcuota.upload.tool=mcuota
 
 unowifi.upload.tool=avrdude
 unowifi.upload.protocol=arduino
@@ -153,6 +151,16 @@ unowifi.build.f_cpu=16000000L
 unowifi.build.board=AVR_UNO
 unowifi.build.core=arduino
 unowifi.build.variant=standard
+
+## ---- UNO WIFI - ESP FIRMWARE ----
+## Upload the firmware of the ESP8266 Module via OTA
+
+unowifi_ota_esp.name=Arduino Uno WiFi - ESP Bootloader
+
+unowifi_ota_esp.bootloader.tool=espota
+unowifi_ota_esp.bootloader.file1=esp8266/firmware_arduino_esp8266_2016_02_11_file1.bin
+unowifi_ota_esp.bootloader.file2=esp8266/firmware_arduino_esp8266_2016_02_11_file2.bin
+unowifi_ota_esp.build.board=ESP_MODULE_UNO
 
 ##############################################################
 
