@@ -144,7 +144,7 @@ public class NetworkDiscovery implements Discovery, ServiceListener, cc.arduino.
       String board = null;
       if (info.hasData()) {
         prefs = new PreferencesMap();
-        board = info.getPropertyString("board");//yun, tian, one etc.. link to boards.txt board entries
+        board = info.getPropertyString("board");
         prefs.put("board", board);
         prefs.put("distro_version", info.getPropertyString("distro_version"));
       }
@@ -191,7 +191,6 @@ public class NetworkDiscovery implements Discovery, ServiceListener, cc.arduino.
     try {
       JmDNS jmDNS = JmDNS.create(address);
       jmDNS.addServiceListener("_arduino._tcp.local.", this);
-      //jmDNS.addServiceListener("_http._tcp.local.", this);
       mappedJmDNSs.put(address, jmDNS);
     } catch (Exception e) {
       e.printStackTrace();
