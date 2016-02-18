@@ -45,7 +45,6 @@ public class DiscoveryManager {
     discoverers = new ArrayList<Discovery>();
     discoverers.add(new SerialDiscovery());
     discoverers.add(new NetworkDiscovery());
-//TODO add new Discovery for ESP8266 ?
     // Start all discoverers
     for (Discovery d : discoverers) {
       try {
